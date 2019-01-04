@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+   
+    <div class="ibox">
+        <div class="ibox-title"><h5>微擎获取openId等信息</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: js;">
+                //获取地址参数值
+				function GetQueryStringFn(name){
+					 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+					 var r = window.location.search.substr(1).match(reg);
+					 if(r!=null)return decodeURIComponent(r[2]); return null;
+				}
+
+				var wqUrl = 'http://wechat.saas.workeredu.com';	//微擎测试地址
+				var uniacId = '4';	//测试公众号id
+				//var wqUrl = 'http://wechat.eenet.com';	//微擎正式地址
+				//var uniacId = '16';	//正式公众号id
+
+				var openid = $.fn.cookie('openid')?$.fn.cookie('openid'):'',	
+					unionid = $.fn.cookie('unionid')?$.fn.cookie('unionid'):'',
+					avatar = $.fn.cookie('avatar')?$.fn.cookie('avatar'):'',	//头像图片地址
+					nickname = $.fn.cookie('nickname')?$.fn.cookie('nickname'):''	//微信昵称
+				var cookieTime = 0.08;	//设置的cookie时间，单位“天”
+				
+				//登录、验证、获取信息
+				function getUserInfo(){
+
+					//判断是否已经登录或短时间内已经登录了
+					if(!$.fn.cookie('openid') && !GetQueryStringFn('openid')){
+
+						var pageUrl = encodeURIComponent(window.location.href);
+						window.location.href = wqUrl + '/eeapi.php?myaction=oauth&uniacid='+ uniacId +'&scope=base&backurl=' + pageUrl;
+
+					}else{
+
+						if(GetQueryStringFn('openid')){
+
+							openid = GetQueryStringFn('openid');
+							unionid = GetQueryStringFn('unionid');
+							avatar = GetQueryStringFn('headimgurl');
+							nickname = GetQueryStringFn('nickname');
+							$.fn.cookie('openid',openid,cookieTime);
+							$.fn.cookie('unionid',unionid,cookieTime);
+							$.fn.cookie('avatar',avatar,cookieTime);
+							$.fn.cookie('nickname',nickname,cookieTime);
+
+						}else if($.fn.cookie('openid')){
+
+							openid = $.fn.cookie('openid');
+							unionid = $.fn.cookie('unionid');
+							avatar = $.fn.cookie('avatar');
+							nickname = $.fn.cookie('nickname');
+
+						}
+					}
+
+
+				}
+				getUserInfo();
+            </pre>
+            
+            <table class="table">
+            	<tr>
+            		<td>注：接口的参数"scope"的值分两种base（静默授权）和user（用户授权）</td>
+            	</tr>
+            </table>
+        </div>
+    </div>
+   
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

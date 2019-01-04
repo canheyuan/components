@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>H5视频播放器</h5></div>
+        <div class="ibox-content">
+        	<div style="max-width:500px; height:300px;"><video src="http://zt.gdzgjy.com/2017/gushihui/media/yjjx.mp4" controls preload ></video></div>
+        	<pre   class="brush: css;">
+                <video src="http://zt.gdzgjy.com/2017/gushihui/media/yjjx.mp4" controls preload width="400" height="300"></video>
+            </pre>
+            <table class="table"> 
+              <tbody><tr>
+                <th style="width:20%;">属性</th>
+                <th>值</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_autoplay.asp" title="HTML5 <video> autoplay 属性">autoplay</a></td>
+                <td>autoplay</td>
+                <td>如果出现该属性，则视频在就绪后马上播放。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_controls.asp" title="HTML5 <video> controls 属性">controls</a></td>
+                <td>controls</td>
+                <td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_height.asp" title="HTML5 <video> height 属性">height</a></td>
+                <td><i>pixels</i></td>
+                <td>设置视频播放器的高度。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_loop.asp" title="HTML5 <video> loop 属性">loop</a></td>
+                <td>loop</td>
+                <td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_preload.asp" title="HTML5 <video> preload 属性">preload</a></td>
+                <td>preload</td>
+                <td><p>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。</p></td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_src.asp" title="HTML5 <video> src 属性">src</a></td>
+                <td><i>url</i></td>
+                <td>要播放的视频的 URL。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_width.asp" title="HTML5 <video> width 属性">width</a></td>
+                <td><i>pixels</i></td>
+                <td>设置视频播放器的宽度。</td>
+              </tr>
+              <tr>
+                <td colspan="3"></td>
+              </tr>
+            </tbody></table>
+        </div>
+    </div>
+    
+     <div class="ibox">
+        <div class="ibox-title"><h5>手机视频不满屏且不显示在最顶端</h5></div>
+        <div class="ibox-content">
+        	<div style="max-width:500px; height:300px;"><video id="video" webkit-playsinline="true" x-webkit-airplay="true"  playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" width="100%" height="100%" preload="auto"  poster="" autoplay src="http://file.ih5.cn/v3/files/2248065/20171122/ec8117f2.mp4" style="object-fit: fill; height:100%!important;"></div>
+        	<pre class="brush: css;">
+                <video id="video" webkit-playsinline="true" x-webkit-airplay="true"  playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" width="100%" height="100%" preload="auto"  poster="" src="http://file.ih5.cn/v3/files/2248065/20171122/ec8117f2.mp4" style="object-fit: fill;">
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>同域名Iframe高度</h5></div>
+        <div class="ibox-content">
+        	<iframe src="" width="100%" height="50" scrolling="auto" id="iframe" name="iframe" frameborder="0"></iframe>
+        	<pre   class="brush: css;">
+            	<iframe src="H5自定义弹窗.html" width="100%" height="300" scrolling="auto" id="" name="" frameborder="0"></iframe>
+                <script type="text/javascript">
+				//iframe自适应高度（同域）
+				function reinitIframe(id){
+					var iframe = document.getElementById(id);
+					try{
+						var bHeight = iframe.contentWindow.document.body.scrollHeight;
+						var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+						var height = Math.max(bHeight, dHeight);
+						iframe.height = height;
+					}catch (ex){}
+				}
+				window.setInterval("reinitIframe('iframe')", 200);
+				</script>
+            </pre>
+            <table class="table">
+                <tbody><tr>
+                    <th style="width:20%;">属性</th>
+                    <th style="width:25%;">值</th>
+                    <th style="width:55%;">描述</th>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_align.asp" title="HTML <iframe> 标签的 align 属性">align</a></td>
+                    <td>left，right，top，middle，bottom</td>
+                    <td><p>规定如何根据周围的元素来对齐此框架。</p></td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_frameborder.asp" title="HTML <iframe> 标签的 frameborder 属性">frameborder</a></td>
+                    <td>1或0</td>
+                    <td>规定是否显示框架周围的边框。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_height.asp" title="HTML <iframe> 标签的 height 属性">height</a></td>
+                    <td>pixels或%</td>
+                    <td>规定 iframe 的高度。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_longdesc.asp" title="HTML <iframe> 标签的 longdesc 属性">longdesc</a></td>
+                    <td><i>URL</i></td>
+                    <td>规定一个页面，该页面包含了有关 iframe 的较长描述。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_marginheight.asp" title="HTML <iframe> 标签的 marginheight 属性">marginheight</a></td>
+                    <td><i>pixels</i></td>
+                    <td>定义 iframe 的顶部和底部的边距。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_marginwidth.asp" title="HTML <iframe> 标签的 marginwidth 属性">marginwidth</a></td>
+                    <td><i>pixels</i></td>
+                    <td>定义 iframe 的左侧和右侧的边距。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_name.asp" title="HTML <iframe> 标签的 name 属性">name</a></td>
+                    <td><i>frame_name</i></td>
+                    <td>规定 iframe 的名称。</td>
+                </tr>
+                
+                <tr>
+                <td class="html5_new"><a href="/tags/att_iframe_sandbox.asp" title="HTML <iframe> 标签的 sandbox 属性">sandbox</a></td>
+                <td>""、allow-forms、allow-same-origin、allow-scripts、allow-top-navigation</li>
+                </ul>
+                </td>
+                <td>启用一系列对 &lt;iframe&gt; 中内容的额外限制。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_scrolling.asp" title="HTML <iframe> 标签的 scrolling 属性">scrolling</a></td>
+                    <td>yes，no，auto</td>
+                    <td>规定是否在 iframe 中显示滚动条。</td>
+                </tr>
+                
+                <tr>
+                    <td class="html5_new"><a href="/tags/att_iframe_seamless.asp" title="HTML <iframe> 标签的 seamless 属性">seamless</a></td>
+                    <td>seamless</td>
+                    <td>规定 &lt;iframe&gt; 看上去像是包含文档的一部分。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_src.asp" title="HTML <iframe> 标签的 src 属性">src</a></td>
+                    <td><i>URL</i></td>
+                    <td>规定在 iframe 中显示的文档的 URL。</td>
+                </tr>
+                
+                <tr>
+                    <td class="html5_new"><a href="/tags/att_iframe_srcdoc.asp" title="HTML <iframe> 标签的 srcdoc 属性">srcdoc</a></td>
+                    <td><i>HTML_code</i></td>
+                    <td>规定在 &lt;iframe&gt; 中显示的页面的 HTML 内容。</td>
+                </tr>
+                
+                <tr>
+                    <td><a href="/tags/att_iframe_width.asp" title="HTML <iframe> 标签的 width 属性">width</a></td>
+                    <td>pixels或%</td>
+                    <td>定义 iframe 的宽度。</td>
+                </tr>
+                </tbody></table>
+        </div>
+    </div>
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

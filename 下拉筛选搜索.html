@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>下拉筛选搜索框</title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+
+</head>
+
+<body>
+<div class="secondPage">
+    <select id="select" >
+    <option value="">月份</option><option value="一月">一月</option><option value="二月">二月</option><option value="三月">三月</option><option value="四月">四月</option>
+    <option value="五月">五月</option><option value="六月">六月</option><option value="七月">七月</option><option value="八月">八月</option><option value="九月">九月</option>
+    <option value="十月">十月</option><option value="十一月">十一月</option><option value="十二月">十二月</option>
+    <option value="11">11</option><option value="12">12</option><option value="22">22</option><option value="33">33</option><option value="111">111</option>
+    </select>
+
+
+<link href="js/plugins/combo_select/combo.select.css" rel="stylesheet"><!--下拉筛选搜索插件-->
+<pre class="brush: css;">
+<select  >
+<option value="">月份</option><option value="一月">一月</option><option value="二月">二月</option><option value="三月">三月</option><option value="四月">四月</option>
+<option value="五月">五月</option><option value="六月">六月</option><option value="七月">七月</option><option value="八月">八月</option><option value="九月">九月</option>
+<option value="十月">十月</option><option value="十一月">十一月</option><option value="十二月">十二月</option><option value="11">11</option><option value="12">12</option>
+<option value="22">22</option><option value="33">33</option><option value="111">111</option>
+</select>
+
+<link href="js/plugins/combo_select/combo.select.css" rel="stylesheet"><!--下拉筛选搜索插件-->
+<script src="js/plugins/combo_select/jquery.combo.select.js" charset="utf-8"></script><!--下拉筛选搜索插件-->
+<script>
+$(function(){
+	$('#select').comboSelect();
+	
+	//下面是默认值参考
+	/*$('#select').comboSelect({			
+		comboClass         : 'combo-select',
+		comboArrowClass    : 'combo-arrow',
+		comboDropDownClass : 'combo-dropdown',
+		inputClass         : 'combo-input text-input',
+		disabledClass      : 'option-disabled',
+		hoverClass         : 'option-hover',
+		selectedClass      : 'option-selected',
+		markerClass        : 'combo-marker',
+		themeClass         : '',
+		maxHeight          : 200,
+		extendStyle        : true,
+		focusInput         : true
+	});*/
+})
+</script>
+</pre>
+</div>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</body>
+</html>

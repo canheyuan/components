@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>幻灯片</title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+    <div class="ibox">
+        <div class="ibox-title"><h5>H5图片生成功能</h5><a class="ibox-tools" href="上传图片_1.html" target="_blank">具体demo</a></div>
+        <div class="ibox-content" style="overflow:hidden;">
+            
+            <div class="iframe">
+                <iframe width="100%" height="460px" frameborder="0" src="上传图片_1.html"></iframe>
+            </div>
+            <div class="iframe_code">
+            	<h3>主要代码：</h3>
+                <pre   class="brush: css;">
+                <!--上传图片-->
+                <div class="img_upload clearfix">
+                    <div class="img" style="background-image:url('http://css.gzedu.com/xuefuyi_com/jiaofei_platform/v2.0/images/sfz01.png');">
+                    </div>
+                    <div class="info">
+                        <p>拍摄/上传您的大陆二代<br>身份证人像面</p>
+                        <a class="upload_btn" href="javascript:;">拍摄/上传<input type="file" accept="image/*" id="" class="upload_input"></a>
+                    </div>
+                </div>
+                <!--图片放大弹窗-->
+                <div class="mask_bg" style="display:none; " id="imgPop">
+                    <div class="mask_bg_ctn">
+                        <img src="" style="max-width: 100%;"/>
+                    </div>
+                </div>
+                
+                
+                /*弹窗样式*/
+                .mask_bg{background:rgba(0,0,0,.8); height:100%; width:100%; position:fixed; top:0; left:0; display:table; z-index: 10000; opacity:0; -webkit-transition:all .3s; transition:all .3s;}
+                .mask_bg_ctn{display:table-cell; vertical-align:middle; text-align:center;}
+                .mask_bg.pop_show{opacity:1;}
+                /*上传图片*/
+                .img_upload{overflow:hidden;}
+                .img_upload .img{float:left; width:3rem; height:2rem; border:.02rem solid #e6e6e6; overflow:hidden; background-color:#f0f0f0; background-position:center center; background-repeat:no-repeat; font-size:0;  background-size:contain;}
+                .img_upload .info{float:right; width:50%; text-align:right;}
+                .img_upload .info p{color:#999999; font-size:.28rem; height:1.4rem; line-height:.4rem;}
+                .upload_btn { width: 2rem; height: .6rem; display: inline-block; font: .28rem/.6rem "微软雅黑"; text-align: center; color: #fff; background: #29cc6d; border-radius: .06rem; position:relative;}
+                .upload_btn:active{background:#26a75c;}
+                .upload_btn .upload_input { width: 2rem; height: .6rem; display: block; outline: none; resize: none; box-sizing: border-box; position: absolute; top: 0; left: 0; z-index: 2; opacity: 0; }
+                
+                <script>
+				$(function(){
+					//上传图片
+					var imgSize = '',imgWidth = '',imgHeight = '',cvsWidth = '' ,cvsHeight = '',result6 = '', _this = '';
+					$(".upload_input").on('change', function () {
+						_this = $(this).parents('.img_upload').find('.img');
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							var compressImg = compress( this.result,fileSize);
+						};
+						if(this.files.length > 0){
+							reader.readAsDataURL(this.files[0]);
+							imgSize = this.files[0].size + ' Bytes';
+							var fileSize = Math.round(this.files[0].size/1024/1024) ;
+						}
+					});
+					var compress = function (res,fileSize) {
+						var img = new Image(),
+							maxW = 750; //设置最大宽度
+					
+						img.onload = function () {
+							var cvs = document.createElement( 'canvas'),
+								ctx = cvs.getContext( '2d');
+					
+							imgWidth = img.width;
+							imgHeight = img.height;
+					
+							if(img.width > maxW) {
+								img.height *= maxW / img.width;
+								img.width = maxW;
+							}
+							cvs.width = img.width;
+							cvs.height = img.height;
+							cvsWidth = cvs.width;
+							cvsHeight = cvs.height;
+							ctx.clearRect(0, 0, cvs.width, cvs.height);
+							ctx.drawImage(img, 0, 0, img.width, img.height);
+							
+							var compressRate = getCompressRate(1,fileSize);
+							var dataUrl = cvs.toDataURL( 'image/jpeg', compressRate);
+							//生成图片后执行的函数
+							var $img = _this;
+							$img.css('background-image','url('+dataUrl+')');
+							$img.on('click',function(){
+								$('#imgPop').find('img').attr('src',dataUrl);
+								$('#imgPop').show();
+								setTimeout(function(){ $('#imgPop').addClass('pop_show'); },10);
+								$(document).on('touchmove',function(event) { 
+									event.preventDefault(); //禁止页面滑动
+								}, false);
+							});
+							$('#imgPop').on('click',function(){
+								$('#imgPop').removeClass('pop_show');
+								setTimeout(function(){$('#imgPop').hide();},300);
+								$(document).unbind('touchmove');//解除"禁止页面滑动"
+							});
+						};
+						img.src = res;
+					};
+					function getCompressRate(allowMaxSize,fileSize){ //计算压缩比率，size单位为MB
+						var compressRate = 1;
+						if(fileSize/allowMaxSize > 4){
+						   compressRate = 0.5;
+						} else if(fileSize/allowMaxSize >3){
+						   compressRate = 0.6;
+						} else if(fileSize/allowMaxSize >2){
+						   compressRate = 0.7;
+						} else if(fileSize > allowMaxSize){
+						   compressRate = 0.8;
+						} else{
+						   compressRate = 0.9;
+						}
+						result6 = compressRate;
+						return compressRate;
+					}	
+				});
+				</script>
+                </pre>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

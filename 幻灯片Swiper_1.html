@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>幻灯片</title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="swiper-container name_swiper" id="name_swiper">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide page1">
+        	<img style="width:100%;" src="img/s_bg01.jpg"/>
+		</div>
+		<div class="swiper-slide page2">
+			<img style="width:100%;" src="img/s_bg02.jpg"/>
+		</div>
+		<div class="swiper-slide page3">
+			<img style="width:100%;" src="img/s_bg03.jpg"/>
+		</div>
+		<div class="swiper-slide page4">
+			<img style="width:100%;" src="img/s_bg04.jpg"/>
+		</div>
+	</div>
+	<div class="swiper-pagination"></div>
+</div>
+<style>
+.name_swiper .swiper-pagination-bullet{background:#ffffff; opacity:.9;}
+.name_swiper .swiper-pagination-bullet-active{background:#ff0000;}
+.name_swiper{height:100%; font-size:30px; color:#fff; text-align:center;}
+</style>
+
+<link href="http://css.gzedu.com/common/js/mobile/swiper.min.css" type="text/css" rel="stylesheet" /><!--swiper幻灯片样式-->
+<script src="http://css.gzedu.com/common/js/mobile/swiper.jquery.min.js" charset="utf-8"></script><!--swiper幻灯片插件-->
+<script>
+$(function(){
+	var swiper = new Swiper('#name_swiper', {
+		paginationClickable: true, 
+		direction: 'vertical',	//horizontal（横向）
+		pagination: '.swiper-pagination'
+	});
+})
+</script>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

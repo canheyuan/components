@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+
+    <div class="ibox">
+        <div class="ibox-title"><h5>父iframe添加js</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+		   function reinitIframe(){
+				var iframe = document.getElementById("iframe");
+				try{
+					var bHeight = iframe.contentWindow.document.body.scrollHeight;
+					var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+					var height = Math.max(bHeight, dHeight);
+					iframe.height = height;
+					console.log(height);
+				}catch (ex){}
+			}
+			window.onload = function(){
+				reinitIframe();
+			} 
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+       <div class="ibox-title"><h5>子iframe添加js</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+            window.onload = function(){
+				parent.document.getElementById("iframe").height=document.body.scrollHeight;
+			} 
+            </pre>
+        </div>
+    </div>
+
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>幻灯片</title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+
+    <div class="ibox">
+        <div class="ibox-title"><h5>幻灯片SuperSlide（横屏）</h5><a class="ibox-tools" href="http://www.superslide2.com/param.html" target="_blank">API参数</a></div>
+        <div class="ibox-content">
+        	<!--全屏幻灯片-->
+            <section class="full_slide" id="full_slide">
+                <div class="bd">
+                    <ul>
+                        <li><a href="#" style="background:url(img/banner01.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner02.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner03.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner04.jpg) no-repeat center top;"></a></li>
+                    </ul>
+                </div>
+                <div class="hd"></div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </section>
+            <!--//全屏幻灯片-->
+        	<pre   class="brush: css;">
+            <!--全屏幻灯片-->
+            <section class="full_slide" id="full_slide">
+                <div class="bd">
+                    <ul>
+                        <li><a href="#" style="background:url(img/banner01.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner02.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner03.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner04.jpg) no-repeat center top;"></a></li>
+                    </ul>
+                </div>
+                <div class="hd"></div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </section>
+            <!--//全屏幻灯片-->
+            
+            
+            /*全屏幻灯片*/
+            .full_slide{position:relative; width:100%; height:300px; overflow: hidden;}
+            .full_slide .bd{overflow:hidden; height:100%;}
+            .full_slide .bd ul,
+            .full_slide .bd ul li,
+            .full_slide .bd ul li a{display:block; height:100%;}
+            .full_slide .hd{position:absolute; left:0px; bottom:15px; font-size:0px; overflow:hidden; z-index:5px; width:100%; text-align:center;}
+            .full_slide .hd span{display:inline-block;  width:15px; height:15px; border-radius:50%; cursor:pointer; margin-right:10px; background:#666;}
+            .full_slide .hd span.on{background:#c9141e;}
+            
+            .full_slide .prev,
+            .full_slide .next{position:absolute; top:50%; margin-top:-40px; width:40px; height:80px;background:url(images/slide_btn.png) #333 no-repeat; display:inline-block; cursor:pointer; opacity: 0.5; filter:alpha(opacity=50);
+             -moz-transition: all 0.3s; -webkit-transition: all 0.3s; transition: all 0.3s; -webkit-transition: all 0.3s;}
+            .full_slide .prev{left:0px; background-position: left center; border-top-right-radius:5px; border-bottom-right-radius:5px; 
+            -moz-transform: translateX(-40px); -webkit-transform: translateX(-40px);transform: translateX(-40px);}
+            .full_slide .next{right:0px; background-position: right center; border-top-left-radius:5px; border-bottom-left-radius:5px;
+            -moz-transform: translateX(40px); -webkit-transform: translateX(40px);transform: translateX(40px);}
+            .full_slide:hover .prev,
+            .full_slide:hover .next{ -moz-transform: translateX(0px); -webkit-transform: translateX(0px);transform: translateX(0px);}
+            .full_slide .prev:hover,
+            .full_slide .next:hover{opacity: 0.8; filter:alpha(opacity=80);}
+            /*全屏幻灯片_End*/   
+            
+            
+            <script type="text/javascript" src="http://css.gzedu.com/common/js/SuperSlide.js"></script><!--幻灯片-->
+			<script>
+            $(function(){
+                //全屏幻灯片
+				for(var i = 0; i < $('#full_slide').eq(0).find('.bd li').length; i++){$('#full_slide .hd').append('<span></span>')};
+				$('#full_slide .hd span:first').addClass('on');
+                jQuery("#full_slide").slide({mainCell:".bd ul",titCell:".hd span",effect:"fold",autoPlay:true,delayTime:1000,interTime:5000});
+            })
+            </script>
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>幻灯片SuperSlide（固定宽高）</h5><a class="ibox-tools" href="http://www.superslide2.com/param.html" target="_blank">API参数</a></div>
+        <div class="ibox-content">
+        	<!--固定幻灯片-->
+            <section class="slide" id="slide">
+                <div class="bd">
+                    <ul>
+                        <li><a href="#" style="background:url(img/banner01.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner02.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner03.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner04.jpg) no-repeat center top;"></a></li>
+                    </ul>
+                </div>
+                <div class="hd"></div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </section>
+            <!--//固定幻灯片-->
+        	<pre   class="brush: css;">
+            <!--固定幻灯片-->
+            <section class="slide" id="slide">
+                <div class="bd">
+                    <ul>
+                        <li><a href="#" style="background:url(img/banner01.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner02.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner03.jpg) no-repeat center top;"></a></li>
+                        <li><a href="#" style="background:url(img/banner04.jpg) no-repeat center top;"></a></li>
+                    </ul>
+                </div>
+                <div class="hd"></div>
+                <span class="prev"></span>
+                <span class="next"></span>
+            </section>
+            <!--//固定幻灯片-->
+            
+            
+            /*固定宽高幻灯片*/
+            .slide,
+            .slide .bd,
+            .slide .bd li,
+            .slide .bd li a{display:block; width:1000px;height:300px;}
+            .slide{position:relative;margin:0 auto; overflow: hidden;}
+            .slide .bd{overflow:hidden;}
+            .slide .hd{position:absolute; left:0px; bottom:15px; font-size:0px; overflow:hidden; z-index:5px; width:100%; text-align:center;}
+            .slide .hd span{display:inline-block;  width:15px; height:15px; border-radius:50%; cursor:pointer; margin-right:10px; background:#666;}
+            .slide .hd span.on{background:#c9141e;}
+            .slide .prev,
+            .slide .next{position:absolute; top:50%; margin-top:-40px; width:40px; height:80px;background:url(images/slide_btn.png) #333 no-repeat; display:inline-block; cursor:pointer; opacity: 0.5; filter:alpha(opacity=50);
+             -moz-transition: all 0.3s; -webkit-transition: all 0.3s; transition: all 0.3s; -webkit-transition: all 0.3s;}
+            .slide .prev{left:0px; background-position: left center; border-top-right-radius:5px; border-bottom-right-radius:5px; 
+            -moz-transform: translateX(-40px); -webkit-transform: translateX(-40px);transform: translateX(-40px);}
+            .slide .next{right:0px; background-position: right center; border-top-left-radius:5px; border-bottom-left-radius:5px;
+            -moz-transform: translateX(40px); -webkit-transform: translateX(40px);transform: translateX(40px);}
+            .slide:hover .prev,
+            .slide:hover .next{ -moz-transform: translateX(0px); -webkit-transform: translateX(0px);transform: translateX(0px);}
+            .slide .prev:hover,
+            .slide .next:hover{opacity: 0.8; filter:alpha(opacity=80);}  
+            
+            
+            <script type="text/javascript" src="http://css.gzedu.com/common/js/SuperSlide.js"></script><!--幻灯片-->
+			<script>
+            $(function(){
+                //固定幻灯片
+				for(var i = 0; i < $('#slide').eq(0).find('.bd li').length; i++){$('#slide .hd').append('<span></span>')};
+				$('#slide .hd span:first').addClass('on');
+                jQuery("#slide").slide({mainCell:".bd ul",titCell:".hd span",effect:"fold",autoPlay:true,delayTime:1000,interTime:5000});
+            })
+            </script>
+            </pre>
+        </div>
+    </div>
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

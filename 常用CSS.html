@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+   
+    <div class="ibox">
+        <div class="ibox-title"><h5>常用简单的CSS</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+                CSS字段超出省略（单行样式）:
+                display: block; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;
+                
+                CSS字段超出省略（多行样式,IE9以下不支持）：
+                display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 3;
+				
+				边框阴影（值：水平值、垂直值，模糊距离、阴影尺寸、颜色、内外（inset/outset）。多个阴影，该属性是由逗号分隔的阴影列表）
+				box-shadow: 10px 10px 5px 5px #888888 inset;
+				
+				文字阴影：（值：水平值、垂直值，模糊距离、颜色）
+				text-shadow: 5px 5px 5px #FF0000;
+				
+				动画引用：（值：动画名称、周期时间、动画曲线[默认ease]、延迟时间、播放次数[infinite是无限]、是否逆向地播放(alternate/normal)）
+				animation: myfirst 5s linear 2s 2 alternate;
+            </pre>
+        </div>
+    </div>
+	
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>手机下fixed布局滚动卡顿问题</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+                -webkit-overflow-scrolling: touch; overflow;auto;
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>CSS三角形（border）</h5><a class="ibox-tools">详细代码</a></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+            向左：{ width:0px; height:0px; overflow:hidden; font-size:0px; display:inline-block; border-style:solid; border-width:10px 8px 10px 0px; border-color:transparent  #666 transparent transparent;}
+            
+            向右：{ width:0px; height:0px; overflow:hidden; font-size:0px; display:inline-block; border-style:solid; border-width:10px 0px 10px 8px; border-color:transparent transparent transparent #666;}
+            
+            向上：{ width:0px; height:0px; overflow:hidden; font-size:0px; display:inline-block; border-style:solid; border-width:10px 8px 0 8px; border-color: transparent transparent #666 transparent; }
+            
+            向下：{ width:0px; height:0px; overflow:hidden; font-size:0px; display:inline-block; border-style:solid; border-width:0 8px 10px 8px; border-color:#666 transparent transparent transparent;}
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>支持IE6的固定定位</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: css;">
+            html{ _background-image: url(about:blank); _background-attachment: fixed; }
+            
+            //与顶部距离
+            .ie6{position:fixed; right:0px; top:200px; _position:absolute; _top:expression(eval(document.documentElement.scrollTop)+200);}
+            
+            //与底部距离
+            .ie6{position:fixed; bottom:0px; right:0px; _position:absolute; z-index:999;
+            _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0))-20);}
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>带线的标题</h5></div>
+        <div class="ibox-content">
+        	<div class="line_tit"><span>标题标题</span></div>
+        	 <pre   class="brush: css;">
+             <div class="line_tit"><span>标题标题</span></div>
+             
+             /*带线的标题*/
+            .line_tit{border-bottom:1px solid #ddd; height:30px; line-height:30px; text-align:center; margin-bottom:15px;}
+            .line_tit span{display:inline-block; padding:0 20px; line-height:30px; background:#fff; position:relative; top:14px;}
+            </pre>
+        </div>
+    </div>
+    
+	<div class="ibox">
+        <div class="ibox-title"><h5>手机端加载组件</h5></div>
+        <div class="ibox-content">
+            <pre   class="brush: css;">
+            <div id="loadingToast" class="weui_loading_toast" style="display: none">
+				<div class="weui_mask_transparent"></div>
+				<div class="weui_toast">
+					<div class="weui_loading">
+						<div class="weui_loading_leaf weui_loading_leaf_0"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_1"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_2"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_3"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_4"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_5"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_6"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_7"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_8"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_9"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_10"></div>
+						<div class="weui_loading_leaf weui_loading_leaf_11"></div>
+					</div>
+					<p class="weui_toast_content">数据加载中</p>
+				</div>
+			</div>
+            <style>
+			
+			/*loading*/
+			.weui_loading_toast{display:none}.weui_mask_transpsarent{position:fixed;z-index:1000;width:100%;height:100%;top:0;left:0}.weui_toast{position:fixed;z-index:50000;width:120px;min-height:120px;top:180px;left:50%;margin-left:-60px;background:rgba(40,40,40,0.75);text-align:center;border-radius:5px;color:#fff}.weui_loading{position:absolute;width:0;z-index:1;left:50%;top:38%}.weui_loading_leaf{position:absolute;top:-1px;opacity:.25}.weui_loading_leaf_0{-webkit-animation:opacity-60-25-0-12 1.25s linear infinite;animation:opacity-60-25-0-12 1.25s linear infinite}.weui_loading_toast .weui_toast_content{margin-top:64%;font-size:14px}.weui_toast_content{margin:0 0 15px}.weui_loading_leaf:before{content:" ";position:absolute;width:8.14px;height:3.08px;background:#d1d1d5;box-shadow:rgba(0,0,0,0.0980392) 0 0 1px;border-radius:1px;-webkit-transform-origin:left 50% 0;transform-origin:left 50% 0}.weui_loading_leaf_0{-webkit-animation:opacity-60-25-0-12 1.25s linear infinite;animation:opacity-60-25-0-12 1.25s linear infinite}.weui_loading_leaf_0:before{-webkit-transform:rotate(0deg) translate(7.92px,0px);transform:rotate(0deg) translate(7.92px,0px)}.weui_loading_leaf_1{-webkit-animation:opacity-60-25-1-12 1.25s linear infinite;animation:opacity-60-25-1-12 1.25s linear infinite}.weui_loading_leaf_1:before{-webkit-transform:rotate(30deg) translate(7.92px,0px);transform:rotate(30deg) translate(7.92px,0px)}.weui_loading_leaf_2{-webkit-animation:opacity-60-25-2-12 1.25s linear infinite;animation:opacity-60-25-2-12 1.25s linear infinite}.weui_loading_leaf_2:before{-webkit-transform:rotate(60deg) translate(7.92px,0px);transform:rotate(60deg) translate(7.92px,0px)}.weui_loading_leaf_3{-webkit-animation:opacity-60-25-3-12 1.25s linear infinite;animation:opacity-60-25-3-12 1.25s linear infinite}.weui_loading_leaf_3:before{-webkit-transform:rotate(90deg) translate(7.92px,0px);transform:rotate(90deg) translate(7.92px,0px)}.weui_loading_leaf_4{-webkit-animation:opacity-60-25-4-12 1.25s linear infinite;animation:opacity-60-25-4-12 1.25s linear infinite}.weui_loading_leaf_4:before{-webkit-transform:rotate(120deg) translate(7.92px,0px);transform:rotate(120deg) translate(7.92px,0px)}.weui_loading_leaf_5{-webkit-animation:opacity-60-25-5-12 1.25s linear infinite;animation:opacity-60-25-5-12 1.25s linear infinite}.weui_loading_leaf_5:before{-webkit-transform:rotate(150deg) translate(7.92px,0px);transform:rotate(150deg) translate(7.92px,0px)}.weui_loading_leaf_6{-webkit-animation:opacity-60-25-6-12 1.25s linear infinite;animation:opacity-60-25-6-12 1.25s linear infinite}.weui_loading_leaf_6:before{-webkit-transform:rotate(180deg) translate(7.92px,0px);transform:rotate(180deg) translate(7.92px,0px)}.weui_loading_leaf_7{-webkit-animation:opacity-60-25-7-12 1.25s linear infinite;animation:opacity-60-25-7-12 1.25s linear infinite}.weui_loading_leaf_7:before{-webkit-transform:rotate(210deg) translate(7.92px,0px);transform:rotate(210deg) translate(7.92px,0px)}.weui_loading_leaf_8{-webkit-animation:opacity-60-25-8-12 1.25s linear infinite;animation:opacity-60-25-8-12 1.25s linear infinite}.weui_loading_leaf_8:before{-webkit-transform:rotate(240deg) translate(7.92px,0px);transform:rotate(240deg) translate(7.92px,0px)}.weui_loading_leaf_9{-webkit-animation:opacity-60-25-9-12 1.25s linear infinite;animation:opacity-60-25-9-12 1.25s linear infinite}.weui_loading_leaf_9:before{-webkit-transform:rotate(270deg) translate(7.92px,0px);transform:rotate(270deg) translate(7.92px,0px)}.weui_loading_leaf_10{-webkit-animation:opacity-60-25-10-12 1.25s linear infinite;animation:opacity-60-25-10-12 1.25s linear infinite}.weui_loading_leaf_10:before{-webkit-transform:rotate(300deg) translate(7.92px,0px);transform:rotate(300deg) translate(7.92px,0px)}.weui_loading_leaf_11{-webkit-animation:opacity-60-25-11-12 1.25s linear infinite;animation:opacity-60-25-11-12 1.25s linear infinite}.weui_loading_leaf_11:before{-webkit-transform:rotate(330deg) translate(7.92px,0px);transform:rotate(330deg) translate(7.92px,0px)}@-webkit-keyframes opacity-60-25-0-12{0%{opacity:.25}0.01%{opacity:.25}0.02%{opacity:1}60.01%{opacity:.25}100%{opacity:.25}}@-webkit-keyframes opacity-60-25-1-12{0%{opacity:.25}8.34333%{opacity:.25}8.35333%{opacity:1}68.3433%{opacity:.25}100%{opacity:.25}}@-webkit-keyframes opacity-60-25-2-12{0%{opacity:.25}16.6767%{opacity:.25}16.6867%{opacity:1}76.6767%{opacity:.25}100%{opacity:.25}}@-webkit-keyframes opacity-60-25-3-12{0%{opacity:.25}25.01%{opacity:.25}25.02%{opacity:1}85.01%{opacity:.25}100%{opacity:.25}}@-webkit-keyframes opacity-60-25-4-12{0%{opacity:.25}33.3433%{opacity:.25}33.3533%{opacity:1}93.3433%{opacity:.25}100%{opacity:.25}}@-webkit-keyframes opacity-60-25-5-12{0%{opacity:.270958333333333}41.6767%{opacity:.25}41.6867%{opacity:1}1.67667%{opacity:.25}100%{opacity:.270958333333333}}@-webkit-keyframes opacity-60-25-6-12{0%{opacity:.375125}50.01%{opacity:.25}50.02%{opacity:1}10.01%{opacity:.25}
+			100%{opacity:.375125}}@-webkit-keyframes opacity-60-25-7-12{0%{opacity:.479291666666667}58.3433%{opacity:.25}58.3533%{opacity:1}18.3433%{opacity:.25}100%{opacity:.479291666666667}}@-webkit-keyframes opacity-60-25-8-12{0%{opacity:.583458333333333}66.6767%{opacity:.25}66.6867%{opacity:1}26.6767%{opacity:.25}100%{opacity:.583458333333333}}@-webkit-keyframes opacity-60-25-9-12{0%{opacity:.687625}75.01%{opacity:.25}75.02%{opacity:1}35.01%{opacity:.25}100%{opacity:.687625}}@-webkit-keyframes opacity-60-25-10-12{0%{opacity:.791791666666667}83.3433%{opacity:.25}83.3533%{opacity:1}43.3433%{opacity:.25}100%{opacity:.791791666666667}}@-webkit-keyframes opacity-60-25-11-12{0%{opacity:.895958333333333}91.6767%{opacity:.25}91.6867%{opacity:1}51.6767%{opacity:.25}100%{opacity:.895958333333333}}
+			
+			</style>
+            </pre>
+        </div>
+    </div>
+
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>CSS渐变（支持到IE6）</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: css;">
+             /*上下渐变*/
+            FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0, startColorStr=#8b40d1,endColorStr=#ff0000); /*IE 6 7 8*/ 
+            background: -ms-linear-gradient(top, #8b40d1,  #ff0000);        /* IE 10 */
+            background:-moz-linear-gradient(top,#8b40d1,#ff0000);/*火狐*/ 
+            background:-webkit-gradient(linear, 0% 0%,0% 100% ,from(#8b40d1), to(#ff0000));/*谷歌*/ 
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8b40d1), to(#ff0000));      /* Safari 4-5, Chrome 1-9*/
+            background: -webkit-linear-gradient(top, #8b40d1, #ff0000);   /*Safari5.1 Chrome 10+*/
+            
+            /*左右渐变*/
+            FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=1, startColorStr=#8b40d1,endColorStr=#ff0000); /*IE 6 7 8*/ 
+            background: -ms-linear-gradient(left, #8b40d1,  #ff0000);        /* IE 10 */
+            background:-moz-linear-gradient(left,#8b40d1,#ff0000);/*火狐*/ 
+            background:-webkit-gradient(linear, 0% 0%, 100% 0%,from(#8b40d1), to(#ff0000));/*谷歌*/ 
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#8b40d1), to(#ff0000));      /* Safari 4-5, Chrome 1-9*/
+            background: -webkit-linear-gradient(left, #8b40d1, #ff0000);   /*Safari5.1 Chrome 10+*/
+			
+			/*上下渐变（移动端）*/
+			background:-moz-linear-gradient(top,#8b40d1,#ff0000);/*火狐*/ 
+			background: -webkit-linear-gradient(top, #8b40d1, #ff0000);   /*Safari5.1 Chrome 10+*/
+			
+			/*左右渐变（移动端）*/
+			background:-moz-linear-gradient(left,#8b40d1,#ff0000);/*火狐*/ 
+			background: -webkit-linear-gradient(left, #8b40d1, #ff0000);   /*Safari5.1 Chrome 10+*/
+            </pre>
+        </div>
+    </div>
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

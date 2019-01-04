@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+   
+    
+	<div class="ibox">
+        <div class="ibox-title"><h5>时间戳转日期(时间戳是毫秒)</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: js;">
+            //时间戳转时间
+			const getDate = timestamp => {
+			  //shijianchuo是整数，否则要parseInt转换  
+			  var time = new Date(timestamp);
+			  var y = time.getFullYear();
+			  var m = time.getMonth() + 1;
+			  var d = time.getDate();
+			  var h = time.getHours();
+			  var mm = time.getMinutes();
+			  var s = time.getSeconds();
+			  return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+			}; 
+			const add0 = m => { return m < 10 ? '0' + m : m };
+            </pre>
+        </div>
+    </div>
+	
+	<div class="ibox">
+        <div class="ibox-title"><h5>日期转时间戳（时间格式：2018-09-21 08:06:00）</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: css;">
+            //日期转时间戳
+			const getTimes = datetime =>{
+			  var date = new Date(datetime.replace(/-/g, '/'));
+			  return date.getTime();
+			}
+            </pre>
+        </div>
+    </div>
+	
+	<div class="ibox">
+        <div class="ibox-title"><h5>时间戳转过去时间</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: js;">
+            //时间戳转日期
+			const getDate = timestamp => {
+			  //shijianchuo是整数，否则要parseInt转换  
+			  var time = new Date(timestamp);
+			  var y = time.getFullYear();
+			  var m = time.getMonth() + 1;
+			  var d = time.getDate();
+			  var h = time.getHours();
+			  var mm = time.getMinutes();
+			  var s = time.getSeconds();
+			  return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+			}; 
+			const add0 = m => { return m < 10 ? '0' + m : m };
+
+			const pastTimeFn =(timestamp)=>{
+				var nowDate = new Date();
+				var nowTimestamp = nowDate.getTime();
+				var timevalue = nowTimestamp - timestamp;
+				var timeTip = '';
+
+				if(timevalue < 60*1000){
+					timeTip = parseInt(timevalue/(1000)) + '秒前';
+				}else if(timevalue < 60*60*1000){
+					timeTip = parseInt(timevalue/(60*1000)) + '分前';  
+				}else if(timevalue < 24*60*60*1000){
+					timeTip = parseInt(timevalue/(60*60*1000)) + '小时前';  
+				}else if(timevalue < 2*24*60*60*1000){
+					timeTip = '昨天';  
+				}else if(timevalue < 30*24*60*60*1000){
+					timeTip = parseInt(timevalue/(24*60*60*1000)) + '天前';  
+				}else if(timevalue < 365*24*60*60*1000){
+					timeTip =  getDate(parseInt(timestamp)).substring(5,16);
+				}else{
+					timeTip =  getDate(parseInt(timestamp)).substring(0,10);
+				}
+
+				return timeTip;
+			}
+            </pre>
+        </div>
+    </div>
+
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>

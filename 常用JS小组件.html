@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<div class="secondPage">
+   
+	
+	<div class="ibox">
+        <div class="ibox-title"><h5>手机验证</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: css;">
+             <script>
+            //验证手机号
+			const phoneregFn = phone => {
+			  const reg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+			  return reg.test(phone);
+			}
+			</script>
+            </pre>
+        </div>
+    </div>
+	
+	
+	<div class="ibox">
+        <div class="ibox-title"><h5>邮箱验证</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: css;">
+             <script>
+            //验证邮箱
+			const emailRegFn = email =>{
+				var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				return reg.test(email);
+			}
+			</script>
+            </pre>
+        </div>
+    </div>
+	
+	
+    <div class="ibox">
+        <div class="ibox-title"><h5>点击div外部隐藏div</h5></div>
+        <div class="ibox-content">
+        	 <pre   class="brush: css;">
+             <script>
+            $(function(){
+				$('.outdiv').bind("click",function(e){ 
+					var target = $(e.target); 
+					if(target.closest('.in_div').length == 0){
+						//执行事件
+						$('.in_div').hide();
+					}
+				})
+			})
+			</script>
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>数量增减元件</h5></div>
+        <div class="ibox-content">
+        	<span class="u_num" id="u_num"><input class="num_val" type="number" value="11" /><ins class="up">+</ins><ins class="down">-</ins></span>
+        	<pre   class="brush: css;">
+            <!--html-->
+            <span class="u_num" id="u_num"><input class="num_val" type="number" value="11" /><ins class="up">+</ins><ins class="down">-</ins></span>
+            
+            /*--- CSS ---*/
+            .u_num{ width:66px; height:36px; display:inline-block; border:1px solid #cccccc; overflow:hidden;}
+            .u_num input{float:left; width:46px; text-align:center; height:36px; line-height:36px; border:0; background:#fff; border-right:1px solid #cccccc; color:#666; font-size:12px;}
+            .u_num input:focus{border:none;}
+            .u_num ins{float:left;width:18px; text-align:center; height:18px; line-height:16px; background:#f1f1f1; font-size:12px; cursor:pointer;border-top:1px solid #cccccc; margin-top:-1px; color:#666;}
+            .u_num ins:hover{ background:#e5e3e3;}
+            .u_num input::-webkit-outer-spin-button,
+            .u_num input::-webkit-inner-spin-button {-webkit-appearance: none !important;margin: 0;}
+			
+			<script>
+            $(function(){
+				//数量增减
+				$('#u_num .up').on('click',function(){
+					var num = parseInt($(this).siblings('.num_val').val()) + 1;
+					$(this).siblings('.num_val').val(num);
+				});
+				$('#u_num .down').on('click',function(){
+					var num = parseInt($(this).siblings('.num_val').val()) - 1;
+					if(num > -1){
+						$(this).siblings('.num_val').val(num);
+					}
+				});
+            })
+            </script>
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>返回顶部按钮(右下角)</h5><a class="ibox-tools">查看代码</a></div>
+        <div class="ibox-content">
+            <a class="gotop_btn" href="javascript:;">点击返回顶部</a>
+            <pre   class="brush: css;">
+            <a class="gotop_btn" href="javascript:;">点击返回顶部</a>
+            
+            <script>
+            $(function(){
+                //返回顶部
+				$('.gotop_btn').on('click',function(){
+					$("html, body").animate({ scrollTop: '0'});
+					return false;
+				});
+
+            })
+            </script>
+            </pre>
+        </div>
+    </div>
+    
+    
+     <div class="ibox">
+        <div class="ibox-title"><h5>判断是否微信</h5></div>
+        <div class="ibox-content">
+            <pre   class="brush: css;">
+            //判断是否微信
+			function is_weixin(){
+				var ua = navigator.userAgent.toLowerCase();
+				if(ua.match(/MicroMessenger/i)=="micromessenger") {return true;} else {return false;}
+			}
+            </pre>
+        </div>
+    </div>
+    
+    <div class="ibox">
+        <div class="ibox-title"><h5>上拉加载</h5></div>
+        <div class="ibox-content">
+        	<pre   class="brush: js;">
+
+            function slideLoad(direction,callback){
+				var startPosition, endPosition, flag = true,stop = false;
+				var checkborder = function () {
+					return ($(window).scrollTop() + $(window).height() > $(document).height() - 20) ? 'bottom' : ($(window).scrollTop() < 20) ? 'top' : null;
+				};
+				$(document).on('touchstart', function (e) {
+					flag = checkborder();
+					startPosition = e.touches[0].pageY;
+				});
+				$(document).on('touchcancel touchmove', function (e) {
+					//e.preventDefault();
+					endPosition = e.touches[0].pageY
+					var diance = startPosition - endPosition;
+					var bDiance = diance>0?'bottom':'top';
+
+					if(flag == direction && bDiance == direction && Math.abs(diance) > 50){
+						if ( !stop) {
+							stop = true;
+							callback();
+							setTimeout(function(){stop = false;},1000); //防止加载多次
+						}
+					}
+
+				});
+			};
+			slideLoad('bottom',callback);	//第一个参数值为bottom或top,第二个上拉加载函数
+
+            </pre>
+        </div>
+    </div>
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>
