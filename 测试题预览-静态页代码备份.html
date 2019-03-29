@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台课程编辑</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<!--	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">-->
+    <link href="css/animate.min.css" rel="stylesheet">
+<!--	<link href="css/plugins/treeview/bootstrap-treeview.css" rel="stylesheet">-->
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<!--	<link href="https://test.5ideachinese.com/base/css/ry-ui.css" rel="stylesheet"/>-->
+</head>
+<style>
+	.topic_preview{width:880px; padding:30px 40px; margin:0 auto; border:1px solid #ddd;}
+	.preview_title{font-size:26px; color:#676a6c; font-weight:bold; text-align: center; margin-bottom:30px;}
+	/*左侧*/
+	.preview_left{float:left; width:380px; margin-right:40px; background:url(images/m_bg.jpg) no-repeat center top; background-size:100% auto; height:667px; padding:50px 10px; position:relative;}
+	.preview_left .imgs {text-align:center; font-size:0; line-height:0; }
+	.preview_left .imgs img{width:170px; margin:0 5px 10px; border-radius:5px;}
+	.topic_txt{font-size:14px; color:#fff; text-align: center; margin-top:10px;}
+	.ico_wrap{text-align: center; width:100%; margin-top:20px;}
+	.ico_fixed{position:absolute; bottom:40px; left:0;}
+	.ico_voice{display:inline-block; width:64px; height:64px; background:url(images/ico_voice.png) no-repeat center center; cursor:pointer;}
+	.ico_microphone{display:inline-block; width:64px; height:64px; background:url(images/ico_microphone.png) no-repeat center center; cursor:pointer;}
+	.choose_txt{position:absolute; bottom:0; left:0; width:100%; padding:30px;}
+	.choose_txt span{display:block; height:46px; line-height:20px; padding:13px 20px; background:#1788d2; color:#fff; border-radius:23px; font-size:14px; text-align: center; margin-top:10px; cursor:pointer;}
+	.choose_txt span:hover{background:#1478ba;}
+	.choose_voice{position:absolute; bottom:0; left:0; width:100%; padding:30px 0; text-align: center;}
+	.choose_voice span{display:inline-block; height:64px; line-height:64px; width:64px; background:#1788d2; color:#fff; border-radius:100%; font-size:18px; text-align: center; cursor:pointer; margin:0 20px;}
+	.choose_voice span:hover{background:#1478ba;}
+	.choose_txt2{position:absolute; bottom:0; left:0; width:100%; padding:30px 20px;}
+	.choose_txt2 span{display:inline-block; height:36px; line-height:36px; padding:0 20px; background:#1788d2; color:#fff; border-radius:18px; font-size:14px; text-align: center; margin-bottom:10px; margin-right:10px; cursor:pointer;}
+	.choose_txt2 span:hover{background:#1478ba;}
+	/*右侧*/
+	.preview_right{overflow:hidden; }
+	.preview_right>hr{margin:25px 0;}
+	.preview_info li{overflow:hidden;}
+	.preview_info li span{float:left; display:inline-block; height:30px; line-height:30px; font-size:14px; color:#888888;}
+	.preview_info li p{overflow:hidden; color:#333; font-size:14px; line-height:30px;}
+	.preview_info .line_feed{clear:both; padding-top:15px;}
+	.preview_info .line_feed ins{display:inline-block; line-height:50px; background:none; font-size:16px; vertical-align: top; margin-right:15px;}
+	.preview_info audio{height:50px; }
+	.answer_img{width:240px;}
+</style>
+	
+<body class="top-navigation">
+
+<div class="topic_preview" id="topic_preview"></div>
+
+<!--=听音选图-->
+<div class="topic_preview" style="display:none;">
+	<h2 class="preview_title">你听到外面救护车的声音了吗？</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="ico_wrap ico_fixed"><i class="ico_voice"></i></div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>词汇</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 5</p></li>
+				<li><span class="tit">题目类型：</span><p>听音选图</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed"><img src="images/img.png" alt=""></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+<!--=看图跟读-->
+<div class="topic_preview" style="display:none;">
+	<h2 class="preview_title">污染问题日益严重，保护环境刻不容缓。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="ico_wrap ico_fixed"><i class="ico_microphone"></i></div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>口语</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 6</p></li>
+				<li><span class="tit">题目类型：</span><p>看图跟读</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed">
+						<p>污染问题日益严重，保护环境刻不容缓。</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+<!--看图选择-->
+<div class="topic_preview" style="display:none;">
+	<h2 class="preview_title">我会尽最大的努力做好这份工作。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="ico_wrap "><i class="ico_voice"></i></div>
+			
+			<div class="choose_txt">
+				<span>我做好这份工作了。</span>
+				<span>我会尽最大的努力做好这份工作。</span>
+				<span>我一定会做这份工作。</span>
+			</div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>阅读</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 6</p></li>
+				<li><span class="tit">题目类型：</span><p>看图选择</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed">
+						<p>我会尽最大的努力做好这份工作。</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+<!--听音选音-->
+<div class="topic_preview"  style="display:none;">
+	<h2 class="preview_title">我会尽最大的努力做好这份工作。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="ico_wrap "><i class="ico_voice"></i></div>
+			
+			<div class="choose_voice">
+				<span>A</span>
+				<span>B</span>
+				<span>C</span>
+			</div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>听力</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 6</p></li>
+				<li><span class="tit">题目类型：</span><p>听音选音</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目选项：</span>
+					<div class="line_feed"><ins>A:</ins><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+					<div class="line_feed"><ins>B:</ins><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+					<div class="line_feed"><ins>C:</ins><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span><p>C</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+<!--选择填空-->
+<div class="topic_preview"  style="display:none;">
+	<h2 class="preview_title">小孩子应该帮父母做一些力所能及的事。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="topic_txt">小孩子应该帮父母做一些 ______ 的事。</div>
+			<div class="ico_wrap "><i class="ico_voice"></i></div>
+			
+			<div class="choose_txt">
+				<span>力所能及</span>
+				<span>理所当然</span>
+				<span>竭尽全力</span>
+			</div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>词汇</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 6</p></li>
+				<li><span class="tit">题目类型：</span><p>选择填空</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed">力所能及</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>	
+
+<!--完形填空-->
+<div class="topic_preview"  style="display:none;">
+	<h2 class="preview_title">除非你先答应不会生气，否则我不敢说。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="topic_txt">______ 你先答应不会生气，______ 我不敢说。</div>
+			<div class="ico_wrap "><i class="ico_voice"></i></div>
+			
+			<div class="choose_txt2">
+				<span>除非</span>
+				<span>否则</span>
+				<span>然后</span>
+				<span>除了</span>
+			</div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>语法</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 6</p></li>
+				<li><span class="tit">题目类型：</span><p>完形填空</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed">除非，否则</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>	
+
+<!--选择排序-->
+<div class="topic_preview" style="display:none;">
+	<h2 class="preview_title">这样的回答引起了父亲的愤怒。</h2>
+	<div class="preview_ctn clearfix">
+		<div class="preview_left">
+			<div class="imgs">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+				<img src="images/img.png" alt="">
+			</div>
+			<div class="ico_wrap "><i class="ico_voice"></i></div>
+			<div class="choose_txt2">
+				<span>这样的</span>
+				<span>回答</span>
+				<span>父亲</span>
+				<span>的</span>
+				<span>愤怒</span>
+				<span>引起了</span>
+			</div>
+		</div>
+		<div class="preview_right">
+			<ul class="preview_info clearfix">
+				<li><span class="tit">汉语能力：</span><p>语法</p></li>
+				<li><span class="tit">题目等级：</span><p>Level 5</p></li>
+				<li><span class="tit">题目类型：</span><p>选择排序</p></li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">题目音频：</span>
+					<div class="line_feed"><audio src="https://test.5ideachinese.com/res/voice/2019/02/f38a717fab4becd3ff957f4a4918686f.mp3" controls></audio></div>
+				</li>
+			</ul>
+			<hr>
+			<ul class="preview_info clearfix">
+				<li><span class="tit">正确答案：</span>
+					<div class="line_feed">
+						<p>这样的，回答，引起了，父亲，的，愤怒</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+	
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="https://test.5ideachinese.com/ajax/libs/layer/layer.min.js"></script>
+<script src="https://test.5ideachinese.com/base/js/ry-ui.js?v=2.3.0"></script>
+<script>
+//获取地址参数值
+function GetQueryStringFn(name){
+	 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	 var r = window.location.search.substr(1).match(reg);
+	 if(r!=null)return decodeURIComponent(r[2]); return null;
+}
+
+var courseId = GetQueryStringFn('id')?GetQueryStringFn('id'):'';
+var apiUrl = 'http://192.168.0.244:8090';
+//var courseId = '1d743604d52b1a5c8f1da32c8cfb3faa';	//1 听音选图
+//var courseId = 'c67e7014bc42949d85f0a222bb24e21b';	//2 看图跟读
+//var courseId = '0f4ba6bdb8d07d56f86f92c082fad730';	//3 看图选择
+//var courseId = 'fbcad762e21d6771d1c33b260adeeb43';	//4 选择填空
+//var courseId = '6b92ddaf0632134abb6f45d826f3f7b9';	//5 完形填空
+//var courseId = 'edf9b7165f002d30082b8029efedc9ba';	//6 听音选音
+//var courseId = 'd76e682ed32c632af0481cb345324a1b';	//7 选择排序
+$(function(){
+	
+	$.ajax({
+		cache: true,
+		type: "get",
+		url: apiUrl + `/platform/question/getQuestion/${courseId}`,
+		data: {},
+		async: true,
+		success: function (res) {
+			console.log('题目数据：',res.data)
+			if(res.code == 0){
+				var courseData = res.data;
+				var topicType = courseData.question.questionType;
+				switch(topicType){
+					case '1':
+						topic01Fn(courseData);
+						break;	
+					case '2':
+						topic02Fn(courseData);
+						break;	
+					case '3':
+						topic03Fn(courseData);
+						break;	
+					case '4':
+						topic04Fn(courseData);
+						break;	
+					case '5':
+						topic05Fn(courseData);
+						break;	
+					case '6':
+						topic06Fn(courseData);
+						break;	
+					case '7':
+						topic07Fn(courseData);
+						break;	
+				}
+			}
+		},
+		error: function (data) {
+			
+		}
+	});
+	
+	
+});
+
+//获取能力类型
+function getCapacityFn(type){
+	switch(type){
+		case '1':
+			return '听力';
+			break;	
+		case '2':
+			return '口语';
+			break;	
+		case '3':
+			return '阅读';
+			break;	
+		case '4':
+			return '词汇';
+			break;	
+		case '5':
+			return '语法';
+			break;	
+	}
+}
+	
+	
+//听音选图01
+function topic01Fn(courseData){
+	courseData.options.forEach(item=>{
+		if(courseData.question.answer == item.optionCode){
+			courseData['answerImg'] = item.imgFullUrl;
+		}
+	})
+	
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.options.map((item)=>{
+								return `<img src="${item.imgFullUrl}" alt="">`
+							}).join('')}
+						</div>
+						<div class="ico_wrap ico_fixed" id="voiceBtn"><i class="ico_voice"></i></div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${courseData.categoryList[0].categoryName}</p></li>
+							<li><span class="tit">题目等级：</span><p>${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>听音选图</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed"><img class="answer_img" src="${courseData.answerImg}" alt=""></div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	$('#topic_preview').html(html);
+	
+	$('#voiceBtn').on('click',function(){
+		$('#voice').get(0).play();
+	});
+}	
+
+//看图跟读02
+function topic02Fn(courseData){
+
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							<img src="${courseData.imgs[0].fullPath}" alt="">
+						</div>
+						<div class="ico_wrap ico_fixed"><i class="ico_microphone"></i></div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>看图跟读</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed">
+									<p>${courseData.question.answer}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	$('#topic_preview').html(html);
+	
+}
+	
+//看图选择03
+function topic03Fn(courseData){
+	courseData.options.forEach(item=>{
+		if(courseData.question.answer == item.optionCode){
+			courseData['answerTxt'] = item.content;
+		}
+	})
+	
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.imgs.map((item)=>{
+								return `<img src="${item.fullPath}" alt="">`
+							}).join('')}
+						</div>
+						<div class="ico_wrap "><i class="ico_voice"></i></div>
+
+						<div class="choose_txt">
+							${courseData.options.map((item)=>{
+								return `<span>${item.content}</span>`
+							}).join('')}
+						</div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>看图选择</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed">
+									<p>${courseData.answerTxt}</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	$('#topic_preview').html(html);
+	
+}
+	
+//选择填空04
+function topic04Fn(courseData){
+	courseData['answerTxt'] = '';
+	var answerList = courseData.question.answer.split(',');
+	courseData.options.forEach(item=>{
+		answerList.forEach(item2=>{
+			if(item2 == item.optionCode){
+			   courseData['answerTxt'] = courseData['answerTxt'] + (courseData['answerTxt']?'，':'') +item.content;
+			}
+		});
+	})
+	
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.imgs.map((item)=>{
+								return `<img src="${item.fullPath}" alt="">`
+							}).join('')}
+						</div>
+						<div class="topic_txt">${courseData.question.content}</div>
+						<div class="ico_wrap " id="voiceBtn"><i class="ico_voice"></i></div>
+
+						<div class="choose_txt">
+							${courseData.options.map((item)=>{
+								return `<span code="${item.optionCode}">${item.content}</span>`
+							}).join('')}
+						</div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>选择填空</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed">${courseData.answerTxt}</div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	
+	$('#topic_preview').html(html);
+	
+	$('#voiceBtn').on('click',function(){
+		$('#voice').get(0).play();
+	});
+}
+	
+//听音选音05
+function topic05Fn(courseData){
+	courseData['answerTxt'] = '';
+	var answerList = courseData.question.answer.split(',');
+	courseData.options.forEach(item=>{
+		answerList.forEach(item2=>{
+			if(item2 == item.optionCode){
+			   courseData['answerTxt'] = courseData['answerTxt'] + (courseData['answerTxt']?'，':'') +item.content;
+			}
+		});
+	})
+	
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.imgs.map((item)=>{
+								return `<img src="${item.fullPath}" alt="">`
+							}).join('')}
+						</div>
+						<div class="topic_txt">${courseData.question.content}</div>
+						<div class="ico_wrap " id="voiceBtn"><i class="ico_voice"></i></div>
+
+						<div class="choose_txt2">
+							${courseData.options.map((item)=>{
+								return `<span code="${item.optionCode}">${item.content}</span>`
+							}).join('')}
+						</div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>完形填空</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed">${courseData.answerTxt}</div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	
+	$('#topic_preview').html(html);
+	
+	$('#voiceBtn').on('click',function(){
+		$('#voice').get(0).play();
+	});
+}
+
+//听音选音06
+function topic06Fn(courseData){
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.imgs.map((item)=>{
+								return `<img src="${item.fullPath}" alt="">`
+							}).join('')}
+						</div>
+						<div class="ico_wrap " id="voiceBtn"><i class="ico_voice"></i></div>
+
+						<div class="choose_voice" id="voiceBtns">
+							${courseData.options.map((item)=>{
+								return `<span audio-url="${item.audioFullUrl}">${item.optionCode}</span>`
+							}).join('')}
+						</div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>听音选音</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix" >
+							<li><span class="tit">题目选项：</span>
+								${courseData.options.map((item,i)=>{
+									return `<div class="line_feed"><ins>${item.optionCode}:</ins><audio id="audioList${i}" src="${item.audioFullUrl}" controls></audio></div>`
+								}).join('')}
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span><p>${courseData.question.answer}</p></li>
+						</ul>
+					</div>
+				</div>`;
+	$('#topic_preview').html(html);
+	
+	$('#voiceBtn').on('click',function(){
+		$('#voice').get(0).play();
+	});
+	
+	$('#voiceBtns span').on('click',function(){
+		var index = $(this).index();
+		
+		$('#audioList'+index).get(0).play();
+	});
+}
+	
+//选择排序07
+function topic07Fn(courseData){
+	courseData['answerTxt'] = '';
+	var answerList = courseData.question.answer.split(',');
+	courseData.options.forEach(item=>{
+		answerList.forEach(item2=>{
+			if(item2 == item.optionCode){
+			   courseData['answerTxt'] = courseData['answerTxt'] + (courseData['answerTxt']?'，':'') +item.content;
+			}
+		});
+	})
+	
+	var html = `<h2 class="preview_title">${courseData.question.title}</h2>
+				<div class="preview_ctn clearfix">
+					<div class="preview_left">
+						<div class="imgs">
+							${courseData.imgs.map((item)=>{
+								return `<img src="${item.fullPath}" alt="">`
+							}).join('')}
+						</div>
+						<div class="topic_txt">${courseData.question.content}</div>
+						<div class="ico_wrap " id="voiceBtn"><i class="ico_voice"></i></div>
+
+						<div class="choose_txt2">
+							${courseData.options.map((item)=>{
+								return `<span code="${item.optionCode}">${item.content}</span>`
+							}).join('')}
+						</div>
+					</div>
+					<div class="preview_right">
+						<ul class="preview_info clearfix">
+							<li><span class="tit">汉语能力：</span><p>${getCapacityFn(courseData.question.ability)}</p></li>
+							<li><span class="tit">题目等级：</span><p>Level ${courseData.question.level}</p></li>
+							<li><span class="tit">题目类型：</span><p>选择排序</p></li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">题目音频：</span>
+								<div class="line_feed"><audio id="voice" src="${courseData.audios[0].fullPath}" controls="controls"></audio></div>
+							</li>
+						</ul>
+						<hr>
+						<ul class="preview_info clearfix">
+							<li><span class="tit">正确答案：</span>
+								<div class="line_feed">${courseData.answerTxt}</div>
+							</li>
+						</ul>
+					</div>
+				</div>`;
+	
+	$('#topic_preview').html(html);
+	
+	$('#voiceBtn').on('click',function(){
+		$('#voice').get(0).play();
+	});
+}
+	
+</script>
+
+</body>
+</html>

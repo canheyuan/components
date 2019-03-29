@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台课程编辑</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<!--	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">-->
+    <link href="css/animate.min.css" rel="stylesheet">
+<!--	<link href="css/plugins/treeview/bootstrap-treeview.css" rel="stylesheet">-->
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	<link href="https://test.5ideachinese.com/base/css/ry-ui.css" rel="stylesheet"/>
+	<link href="https://test.5ideachinese.com/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet"/><!--树形结构插件 -->
+</head>
+<style>
+	.course_mdl{background:#fff; padding:20px; margin-top:15px;}	
+	.course_side{float:left; width:300px;  background:#fff; margin-right:40px; background:#eee; height:600px; overflow: auto; padding:20px;}
+	.course_main{overflow:hidden; display:block; background:#fff;}
+	.top-navigation .nav>li.active>a { color: #1ab394; border-bottom: 1px solid #fff;}
+	.edit_box .check_box{ float:left; margin-top:6px;}
+	.edit_box .edit_btn{float:left; margin-top:10px;}
+	.edit_box .txt{padding:6px 0; line-height:20px; font-size:14px;display:none;}
+	.course_mdl .list-group-item>.badge{font-size:0; width:6px; height:6px; padding:0; background:#f00; min-width:inherit; border-radius:100%; margin-top:5px;}
+	
+	.edit_pop{width:800px; padding:30px; background:#fff; margin:20px;}
+	.edit_pop .pop_tit{text-align:center; font-size:16px; color:#333; font-weight: bold; margin-bottom:20px; }
+	.chapter_head{margin-bottom:10px;}
+	.edit_mdl .close_btn,
+	.edit_mdl .edit_btn,
+	.edit_mdl .save_btn{float:right; margin-left:10px; }
+	.chapter_head h3{height:28px; line-height:28px; font-size:14px; color:#333; font-weight:weight; margin:0px; padding-left:10px;}
+	.chapter_head h3 input{margin-right:5px; vertical-align: middle; position:relative; top:-2px;}
+	.chapter_ctn{ overflow: auto;max-height:600px;}
+	.chapter_list li{border:1px solid transparent; border-top:1px solid #dddddd; margin-bottom:20px; }
+	.chapter_list li.cur{border:1px solid #1c84c6;}
+	.chapter_list li .txt{ line-height:20px; background:#fff; border-bottom:1px solid #e7eaec; padding:10px 0 10px 30px; position:relative;}
+	.chapter_list li .gray{ background:#f8f8f8;}
+	.chapter_list li .txt.gray input{position:absolute; top:8px; left:10px;}
+	.chapter_list li .input{margin-bottom:5px;display:none;  }
+	.chapter_list li .input.gray input{background:#f9f9f9;}
+	/*章节内容*/
+	.zjnr_mdl{ overflow:auto; max-height:600px;}
+	.zjnr_list li{background:#f3f3f4; padding:15px; border-radius:6px; margin-bottom:5px; overflow:hidden;}
+	.zjnr_list li .img{float:left; width:110px; height:60px; border-radius:4px; margin-right:20px;}
+	.zjnr_list li button.btn{float:right; margin-left:30px;}
+	.zjnr_list li .info{overflow:hidden;}
+	.zjnr_list li p{line-height:20px; margin:0;}
+	.zjnr_list li .voice_btn{width:40px; height:40px; background:#23c6c8; border-radius:100%; text-align: center; line-height:40px; margin-top:10px;}
+	.zjnr_list li .voice_btn i{font-size:20px; color:#fff; vertical-align: middle;}
+	.caozuo_btn{text-align:center; margin:30px 0;}
+	.caozuo_btn button{margin:0 10px;}
+	
+	.editStatus .chapter_list li.cur{border:1px solid transparent;}
+</style>
+	
+<body class="gray-bg top-navigation" style="background:#eee;">
+<div style=" margin:0 auto;">
+	<div class="select-info" style="padding-top:10px">
+		<form id="contractInfo-form" class="form-inline">
+			<div class="select-list gd">
+				<ul class="clearfix" style="padding-left:30px;">
+					<li>
+						<label for="">课程类型：</label>
+						<select name="status" id="status" style="width:250px;">
+							<option value="0">口语课程</option>
+<!--							<option value="1">语音课程</option>-->
+						</select>
+					</li>
+				</ul>
+			</div>
+		</form>
+	</div>
+	
+    <div class="course_mdl clearfix">
+		
+		<ul class="nav nav-tabs" style="margin-bottom:30px;" id="langTagBtn">
+			<li class="active">
+				<a href="javascript:;" data-lang="en"><img class="gray" src="https://test.5ideachinese.com/img/langs/en.png"><br><span>英语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="ar"><img class="gray" src="https://test.5ideachinese.com/img/langs/ar.png"><br><span>阿拉伯语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="de"><img class="gray" src="https://test.5ideachinese.com/img/langs/de.png"><br><span>德语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="es"><img class="gray" src="https://test.5ideachinese.com/img/langs/es.png"><br><span>西班牙语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="fr"><img class="gray" src="https://test.5ideachinese.com/img/langs/fr.png"><br><span>法语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="ja"><img class="gray" src="https://test.5ideachinese.com/img/langs/ja.png"><br><span>日语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="ko"><img class="gray" src="https://test.5ideachinese.com/img/langs/ko.png"><br><span>韩语</span></a>
+			</li>
+			<li>
+				<a href="javascript:;" data-lang="ru"><img class="gray" src="https://test.5ideachinese.com/img/langs/ru.png"><br><span>俄语</span></a>
+			</li>
+		</ul>
+		
+		<div class="course_side">
+			<div id="treeview1" class="ztree"></div>
+		</div>
+		
+		<div class="course_main">
+			<div id="charpterMain" style="display:none;">
+				<div class="tab-content row">
+					<div class="edit_mdl">
+						<div class="tabs-container col-lg-12" style="margin-bottom:10px;">
+							<div class="chapter_head clearfix">
+								<button type="button" class="btn btn-success btn-sm" id="courseEditBtn" style="float:right; margin-left:10px;"><i class="fa fa-edit"></i> 编辑</button>
+								<button type="button" class="btn btn-success btn-sm save_btn" data-type='course' style="display:none; ">确定</button>
+								<button type="button" class="btn btn-white btn-sm close_btn" style="display:none;">取消</button>
+								<h3>课程标题</h3>
+							</div>
+							<div class="tab-content" id="editTitleCtn">
+								<ul class="form-horizontal chapter_list">
+									
+								</ul>
+							</div>
+						</div>
+
+						<div class="tabs-container col-lg-12" style="margin-bottom:10px;">
+							<div class="chapter_head clearfix">
+	<!--
+								<button type="button" class="btn btn-success btn-sm edit_btn"><i class="fa fa-edit"></i> 编辑</button>
+								<button type="button" class="btn btn-success btn-sm save_btn" data-type='intro' style="display:none; ">确定</button>
+								<button type="button" class="btn btn-white btn-sm close_btn" style="display:none;">取消</button>
+	-->
+								<h3>课程简介</h3>
+							</div>
+							<div class="tab-content" id="editIntroCtn">
+								<ul class="form-horizontal chapter_list">
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					
+					<div class="tab-pane active">
+						<div class="col-lg-6 edit_mdl">
+							
+							<div class="chapter_head clearfix">
+								<button type="button" class="btn btn-success btn-sm edit_btn"><i class="fa fa-edit"></i> 编辑</button>
+								<button type="button" class="btn btn-success btn-sm save_btn" data-type='chapter' style="display:none; ">确定</button>
+								<button type="button" class="btn btn-white btn-sm close_btn" style="display:none;">取消</button>
+								<h3><input type="checkbox" id="chapterAllBtn">课程章节</h3>
+							</div>
+							
+							<div class="chapter_ctn" id="editChapterCtn">
+								<ul class="form-horizontal chapter_list">
+<!--
+									<li>
+										<div class="txt gray"><input type="checkbox">章节1章节1章节1章节1章节1章节1</div>
+										<div class="txt">章节标题内容章节标题内容章节标题内容章节标题内容章节标题内容章节标题内容</div>
+										<div class="input gray"><input type="text" class="form-control"></div>
+										<div class="input"><input type="text" class="form-control"></div>
+									</li>
+-->
+								</ul>
+							</div>
+							
+						</div>
+						
+						<div class="col-lg-6">
+							
+							<div class="zjnr_mdl" id="contentList">
+								<ul class="zjnr_list" >
+
+								</ul>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="caozuo_btn">
+<!--
+					<button type="button" class="btn btn-lg btn-warning btn-rounded" style="width:200px;"><i class="fa fa-legal" style="margin-right:5px;"></i>下 架</button>
+					<button type="button" class="btn btn-lg btn-success btn-rounded" style="width:200px;"  id=""><i class="fa fa-check-square-o" style="margin-right:5px;"></i>保 存</button>
+					
+-->
+                    <button type="button" class="btn btn-lg btn-primary btn-rounded" style="width:200px;" id="submitBtn"><i class="fa fa-external-link" style="margin-right:5px;"></i>提交审批</button>
+					<button type="button" class="btn btn-lg btn-success btn-rounded" style="width:200px; display:none;"  id="examineBtn"><i class="fa fa-check-square-o" style="margin-right:5px;"></i>审批通过</button>
+<!--					<button type="button" class="btn btn-lg btn-warning btn-rounded" style="width:200px;" id="aaad"><i class="fa fa-legal" style="margin-right:5px;"></i>刷新树形结构</button>-->
+				</div>
+
+			</div>
+
+		</div>
+		
+	</div>
+</div>
+	
+	
+<!--编辑弹窗-->
+<div class="edit_pop" style="display:none;">
+	<div class="form-horizontal">
+		<div class="pop_tit">内容修改</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">zh</div>
+			<div class="col-sm-9">
+				<input type="text" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">en</div>
+			<div class="col-sm-9">
+				<input type="text" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">音频</div>
+			<div class="col-sm-7">
+				<input type="text" class="form-control" style="">
+			</div>
+			<div class="col-sm-2" style="text-align:right;">
+				<button class="btn btn-success " type="button"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">上传</span></button>
+				<input type="file" style="display: none;">
+			</div>
+		</div>
+		
+		<div class="form-group" style="margin-top: 20px; text-align: center;">
+            <button type="submit" class="btn btn-primary">确 定</button>
+        </div>
+		
+	</div>
+</div>	
+
+	
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<!--<script src="js/plugins/treeview/bootstrap-treeview.js"></script>-->
+<script src="https://test.5ideachinese.com/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+	
+<script src="https://test.5ideachinese.com/ajax/libs/layer/layer.min.js"></script>
+<script src="https://test.5ideachinese.com/base/js/ry-ui.js?v=2.3.0"></script>
+<script>
+
+	
+	var apiUrl = 'https://test.5ideachinese.com';
+	var currentLang = 'en'; 	//当前语言
+	var currentEditCtn = '';	//当前操作内容
+	var currentCourseStatus = '';	//当前课程上下架状态
+	var isEdit = false; 		//是否编辑状态
+	var currentCourseId = '';	//当前章节所属的课程id
+	var currentData = null;	//当前章节节点数据
+	var currentChapterId ='';	//当前内容所属的章节id
+	var currentChapterData =null;	//当前内容数据
+	var courseIndex = 0;
+	
+	var zTree;
+	var setting = {
+        view: {
+            nameIsHTML: true,
+			showIcon:false,
+			fontCss: setFontCss
+        },
+        data: {
+            simpleData: {
+                enable: true
+            },
+            keep: {
+                parent: true
+            }
+        },
+        open: false,
+        callback: {
+            onClick: nodeClick,	//点击节点
+			//展开节点
+            onExpand: function (event, treeId, treeNode) {
+                addSubNode(treeNode);
+            }
+        }
+    };
+	
+	function setFontCss(treeId, treeNode) {
+		//console.log(treeId,treeNode)
+		var colorValue = null;
+		colorValue = (treeNode.level != 0 && treeNode.publish == 'Y')
+		if(treeNode.level != 0){
+		    if(treeNode.approveStatus == 'ENABLED' ){ colorValue = {color:"green"}; }
+			if(treeNode.approveStatus == 'REJECT' || treeNode.approveStatus == 'INITIAL' ){ colorValue = {color:"red"}; }
+			if(treeNode.approveStatus == 'APPROVING' ){ colorValue = {color:"blue"}; }
+		}
+		return colorValue;
+	};
+
+	//点击节点
+    function nodeClick(event, treeId, treeNode, clickFlag) {
+		
+		addSubNode(treeNode);
+		if(treeNode.courseId){
+			courseIndex = treeNode.index;
+			currentCourseStatus = treeNode.approveStatus;	//设置当前课程的状态
+			getChapterFn(treeNode.courseId);
+		}
+    }
+	
+	//加载树形结构
+	function treeFn(index){
+		$.ajax({
+			cache: true,
+			type: "post",
+			url: apiUrl + "/platform/oralCategory/list",
+			data: {},
+			async: true,
+			success: function (res) {
+
+				if(res.code == 0){
+					var list = res.rows;
+					console.log("加载一级节点：",list);
+					list.forEach((item,i)=>{
+						item.name = item.nameMulti.zh;
+						item.isParent = true;
+						item.index = i;
+					});
+				}
+				zTree = $.fn.zTree.init($("#treeview1"), setting, list);
+//				zTree.expandAll(false);
+//				zTree.expandNode(zTree.getNodes()[index], true, true, true);
+				console.log('子节点1：',zTree.getNodes()[index]);
+				
+				addSubNode(zTree.getNodes()[index],function(){
+					//加载节点后，若有选中课程，则刷新课程，章节和段落的内容
+					if(currentCourseId){
+						console.log('子节点22：',zTree.getNodes()[index]);
+						var courseChild = zTree.getNodes()[index].children?zTree.getNodes()[index].children:[];
+						courseChild.forEach(item=>{
+							if(item.courseId == currentCourseId){
+								currentCourseStatus = item.approveStatus;	//设置当前课程的状态
+								getChapterFn(currentCourseId);
+								getContentFn(currentChapterId);
+								
+							}
+						});
+					}
+				});	//默认加载的子节点
+				
+				
+			},
+			error: function (data) {
+				alert("error");
+			}
+		});
+	}
+	
+	//展开节点并加载课程子节点
+    function addSubNode(treeNode,callback) {
+        if (!treeNode.isParent) return;
+        var s = treeNode.children;
+        if (s != undefined)  return;
+		//zTree.addNodes(treeNode, { name:"新增节点"});
+		$.ajax({
+			cache: true,
+			type: "get",
+			url: apiUrl + `/platform/oralCourse/listByCate?categoryId=${treeNode.categoryId}`,
+			data: {
+				pageNum	:1,
+				pageSize:200
+			},
+			async: true,
+			success: function (res) {
+				console.log('子节点：',res);
+				if(res.code == 0){
+					var list = res.data;
+					list.forEach((item,i)=>{
+						item.name = item.nameMulti.zh;
+						item.checked = "checked";
+						item.index = treeNode.index;
+						//item.isParent = true;
+					});
+					zTree.addNodes(treeNode, list);
+					callback && callback();
+                }else{
+                    $.modal.alertWarning(res.msg);
+				}
+			},
+			error: function (data) {
+				//alert("error");
+			}
+		});
+    }
+	
+	
+	//设置课程标题简介
+	function setCourseFn(data){
+		var lang = currentLang;
+		$('#editTitleCtn .chapter_list').html(`<li>
+			<div class="txt gray" style="padding-left:10px;">${data.nameMulti['zh']?data.nameMulti['zh']:'--'}</div>
+			<div class="txt" style="padding-left:10px;">${data.nameMulti[lang]?data.nameMulti[lang]:'--'}</div>
+			<div class="input gray"><input type="text" class="form-control" id="courseTitleZh" value="${data.nameMulti['zh']?data.nameMulti['zh']:''}"></div>
+			<div class="input"><input type="text" class="form-control" id="courseTitleLang" value="${data.nameMulti[lang]?data.nameMulti[lang]:''}"></div>
+		</li>`);
+		
+		$('#editIntroCtn .chapter_list').html(`<li>
+			<div class="txt gray" style="padding-left:10px;">${data.introMulti['zh']?data.introMulti['zh']:'暂无简介！'}</div>
+			<div class="txt" style="padding-left:10px;">${data.introMulti[lang]?data.introMulti[lang]:"--"}</div>
+			<div class="input gray"><input type="text" class="form-control" id="courseIntroZh" value="${data.introMulti['zh']?data.introMulti['zh']:''}"></div>
+			<div class="input"><input type="text" class="form-control" id="courseIntroLang" value="${data.introMulti[lang]?data.introMulti[lang]:''}"></div>
+		</li>`);
+	}
+
+	//获取章节数据
+	function getChapterFn(courseId){
+		$.ajax({
+			cache: true,
+			type: "get",
+			url: apiUrl + `/platform/oralCourse/detail?courseId=${courseId}`,
+			data: {
+				pageNum	:1,
+				pageSize:100
+			},
+			async: true,
+			success: function (res) {
+				
+				if(res.code == 0){
+					currentData = res.data;
+					console.log('章节节点：',currentData);
+					currentCourseId = courseId;
+					setChapterFn(currentData);
+					//默认加载第一条内容数据
+					if(currentData.chapterList.length > 0){
+						getContentFn(currentData.chapterList[0].chapterId);
+					}
+                }else{
+                    $.modal.alertWarning(res.msg);
+				}
+				
+			},
+			error: function (data) {
+				//alert("error");
+			}
+		});
+	};
+	
+	//设置章节数据
+	function setChapterFn(data){
+		var html = '';
+		var lang = currentLang;
+		setCourseFn(data);
+		
+		//章节列表
+		var chapterList = data.chapterList;
+		for(var i=0; i<chapterList.length; i++){
+			
+			html += `<li chapterId="${chapterList[i].chapterId}" class="${i==0?'cur':''}">
+						<div class="txt gray"><input type="checkbox" ${chapterList[i].publish=='Y'?'checked':''}>${chapterList[i].nameMulti['zh']?chapterList[i].nameMulti['zh']:''}</div>
+						<div class="txt">${chapterList[i].nameMulti[lang]?chapterList[i].nameMulti[lang]:''}</div>
+						<div class="input gray"><input type="text" class="form-control input_zh" value="${chapterList[i].nameMulti['zh']?chapterList[i].nameMulti['zh']:''}"></div>
+						<div class="input"><input type="text" class="form-control input_lang" value="${chapterList[i].nameMulti[lang]?chapterList[i].nameMulti[lang]:''}"></div>
+					</li>`;
+		}
+		if(currentCourseStatus=="ENABLED"){
+			$('#courseEditBtn,.edit_btn').hide();
+			$('#submitBtn').hide();
+		}else{
+			$('#courseEditBtn,.edit_btn').show();
+			$('#submitBtn').show();
+		}
+		if(currentCourseStatus=='APPROVING'){
+		   	$('#examineBtn').show();
+			$('#submitBtn').hide();
+		}else{
+			$('#examineBtn').hide();
+			//$('#submitBtn').show();
+		}
+		
+		$('#editChapterCtn .chapter_list').html(html);
+		$('#charpterMain').show();
+	};
+	
+	//获取内容数据
+	function getContentFn(chapterId){
+		$.ajax({
+			cache: true,
+			type: "post",
+			url: apiUrl + `/platform/oralParagraph/list?chapterId=${chapterId}`,
+			data: {
+				pageNum	:1,
+				pageSize:100
+			},
+			async: true,
+			success: function (res) {
+				console.log('内容：',res);
+				if(res.code == 0){
+					currentChapterData = res.rows;
+					currentChapterId = chapterId;
+					setContentFn(currentChapterData);
+                }else{
+                    $.modal.alertWarning(res.msg);
+				}
+			},
+			error: function (data) {
+				
+			}
+		});
+	};
+	
+	//设置内容数据
+	function setContentFn(data){
+		var html = '';
+		var lang = currentLang;
+		
+		//章节列表
+		var contentList = data;
+		for(var i=0; i<contentList.length; i++){
+			html += `<li>
+						<button type="button" class="btn btn-success btn-xs" style='${currentCourseStatus=="ENABLED"?"display:none;":""}'  onClick='currentEditCtn="paragraph"; $.modal.open("修改口语课程段落", "${apiUrl}/platform/oralParagraph/edit/${contentList[i].paragraphId}")'><i class="fa fa-edit"></i> 编辑</button>
+						<div class="info">
+							<p>${contentList[i].contentMulti['zh']?contentList[i].contentMulti['zh']:'--'}</p>
+							<p>${contentList[i].contentMulti[lang]?contentList[i].contentMulti[lang]:'--'}</p>
+							<audio style="${contentList[i].voicePath?'':'display:none'}" src="${contentList[i].voicePath?contentList[i].voicePath:''}" controls="controls"></audio>
+						</div>
+					</li>`;
+		}
+		$('#contentList .zjnr_list').html(html);
+		$('#contentList').show();
+	};
+	
+	//弹窗回调函数
+	function reload(){
+		
+		if(currentEditCtn == 'course'){
+		   //刷新课程
+			treeFn(courseIndex);	//刷新课程树形结构，章节，段落
+			//getChapterFn(currentCourseId);
+		}else if(currentEditCtn == 'paragraph'){
+			//刷新段落
+			getContentFn(currentChapterId);
+		}
+		
+	}
+	
+
+$(function () {
+	//默认加载一级节点
+	treeFn(0);
+	
+	//语言切换
+	$('#langTagBtn li a').on('click',function(){
+		if(isEdit){
+			alert('编辑状态下不能切换语言！');
+			return;
+		}
+		$(this).parent('li').addClass('active').siblings().removeClass('active');
+		currentLang = $(this).attr('data-lang');
+		//重新赋值章节内容
+		currentData && setChapterFn(currentData);
+		currentChapterData && setContentFn(currentChapterData);
+	});
+	
+	//点击章节加载内容
+	$('#editChapterCtn').on('click', 'li', function(){
+		if($(this).hasClass('cur')){return;}
+		$(this).addClass('cur').siblings().removeClass('cur');
+		var chapterId = $(this).attr('chapterId');
+		getContentFn(chapterId);
+	});
+	
+	//点击编辑按钮
+	$('.edit_btn').on('click',function(){
+		var parent = $(this).parents('.edit_mdl');
+		parent.find('.save_btn,.close_btn').show();
+		parent.find('.edit_btn').hide();
+		parent.find('.chapter_list .txt').hide();
+		parent.find('.chapter_list .input').show();
+		isEdit = true;
+	});
+	
+	//点击取消按钮
+	$('.close_btn').on('click',function(){
+		var parent = $(this).parents('.edit_mdl');
+		parent.find('.save_btn,.close_btn').hide();
+		parent.find('.edit_btn').show();
+		parent.find('.chapter_list .txt').show();
+		parent.find('.chapter_list .input').hide();
+		isEdit = false;
+	});
+	
+	//点击修改课程标题
+	$('#courseEditBtn').on('click',function(){
+		currentEditCtn="course"
+		$.modal.open("修改口语课程信息", apiUrl + "/platform/oralCourse/edit/" + currentCourseId);
+	});
+	
+	
+	//点击保存按钮
+	$('.save_btn').on('click',function(){
+		var parent = $(this).parents('.edit_mdl');
+		var dataType = $(this).attr('data-type');
+		
+		//章节
+		if(dataType == 'chapter'){
+			
+			var timerNum = 0;
+			//循环提交每个章节
+			currentData.chapterList.forEach((item,i)=>{
+				var input_zh = parent.find('.chapter_list li').eq(i).find('.input_zh').val();
+				var input_lang = parent.find('.chapter_list li').eq(i).find('.input_lang').val();
+				var isChange = false;
+				var langDatas = Object.assign({ar:'',de:'',en:'',es:'',fr:'',ja:'',ko:'',ru:'',zh:''}, item.nameMulti);
+				
+				
+				//循环判断
+				Object.keys(langDatas).forEach(key=>{
+					if(key=='zh' && langDatas[key]!=input_zh){
+						langDatas[key] = input_zh;
+						isChange=true;
+					}
+					if(key==currentLang &&  langDatas[key]!=input_lang){
+						langDatas[key] = input_lang;
+						isChange=true;
+					}
+				});
+				if(isChange){
+					//提交保存章节内容
+					$.ajax({
+						dataType: 'json',
+						type: "post",
+						url: apiUrl + `/platform/oralChapter/editPart`,
+						data: {
+							chapterId : item.chapterId,
+							name : langDatas['zh'],
+							nameEn:langDatas['en'],
+							nameMulti:langDatas,
+						},
+						async: true,
+						success: function (res) {
+							timerNum++;
+							if(res.code == 0){
+								console.log('保存章节内容成功');
+                            }else{
+                                $.modal.alertWarning(res.msg);
+							}
+						},
+						error:function(){
+							timerNum++;
+						}
+					});   
+				}else{
+					timerNum++;
+				}
+
+			});
+			
+			var timer = setInterval(function(){
+				if(currentData.chapterList.length == timerNum){
+				   	clearInterval(timer);
+					//保存成功后执行
+					getChapterFn(currentCourseId);
+					parent.find('.save_btn,.close_btn').hide();
+					parent.find('.edit_btn').show();
+					parent.find('.chapter_list .txt').show();
+					parent.find('.chapter_list .input').hide();
+					isEdit = false;
+				}
+			},300);
+
+		}
+		//修改课程标题
+		else if(dataType=='course'){
+			
+			return;
+			//改为弹窗iframe修改，下面的都不要了
+			
+			var title_zh = parent.find('#courseTitleZh').val();
+			var title_lang = parent.find('#courseTitleLang').val();
+			var intro_zh = parent.find('#courseIntroZh').val();
+			var intro_lang = parent.find('#courseIntroLang').val();
+			
+			var isChange = false;
+//			var titleLang = currentData.nameMulti;
+//			var introLang =  currentData.introMulti;
+			var titleLang = Object.assign({ar:'',de:'',en:'',es:'',fr:'',ja:'',ko:'',ru:'',zh:''}, currentData.nameMulti);
+			var introLang =  Object.assign({ar:'',de:'',en:'',es:'',fr:'',ja:'',ko:'',ru:'',zh:''}, currentData.introMulti);
+			
+			//标题循环判断是否有改动
+			Object.keys(titleLang).forEach(key=>{
+				if(key=='zh' && titleLang[key]!=title_zh){
+					titleLang[key] = title_zh;
+					isChange=true;
+				}
+				if(key==currentLang &&  titleLang[key]!=title_lang){
+					titleLang[key] = title_lang;
+					isChange=true;
+				}
+			});
+			
+			//简介循环判断是否有改动
+			Object.keys(introLang).forEach(key=>{
+				if(key=='zh' && introLang[key]!=intro_zh){
+					introLang[key] = intro_zh;
+					isChange=true;
+				}
+				if(key==currentLang &&  introLang[key]!=intro_lang){
+					introLang[key] = intro_lang;
+					isChange=true;
+				}
+			});
+			
+			if(isChange){
+				//提交保存章节内容
+				$.ajax({
+					dataType: 'json',
+					type: "post",
+					url: apiUrl + `/platform/oralCourse/editPart`,
+					data: {
+						courseId : currentData.courseId,
+						name : titleLang['zh'],
+						nameEn:titleLang['en'],
+						nameMulti:titleLang,
+						intro:introLang['zh'],
+						introEn:introLang['en'],
+						introMulti:introLang
+					},
+					async: true,
+					success: function (res) {
+						if(res.code == 0){
+							console.log('保存课程内容成功');
+							//保存成功后执行
+							getChapterFn(currentCourseId);
+							parent.find('.save_btn,.close_btn').hide();
+							parent.find('.edit_btn').show();
+							parent.find('.chapter_list .txt').show();
+							parent.find('.chapter_list .input').hide();
+							isEdit = false;
+
+						}else{
+                            $.modal.alertWarning(res.msg);
+						}
+					}
+				});   
+			}else{
+				parent.find('.save_btn,.close_btn').hide();
+				parent.find('.edit_btn').show();
+				parent.find('.chapter_list .txt').show();
+				parent.find('.chapter_list .input').hide();
+				isEdit = false;
+			}
+		}
+		
+	});
+	
+	
+	//章节全选、反选
+	$('#chapterAllBtn').change('click',function(){
+		console.log('全选：',$(this).is(':checked'));
+		if($(this).is(':checked')){
+		   	$('#editChapterCtn li').each(function(i){
+				$(this).find("input[type='checkbox']").prop("checked", true);
+			});
+		 }else{
+			$('#editChapterCtn li').each(function(i){
+				$(this).find("input[type='checkbox']").prop("checked", false);
+			}); 
+		 }
+	});
+	$("#editChapterCtn").on('change',"li input[type='checkbox']",function(){
+		console.log('123232323');
+		if(!$(this).is(':checked')){
+			$('#chapterAllBtn').prop("checked", false);
+		}
+	})
+	
+	
+	//提交审批课程
+	$('#submitBtn').on('click',function(){
+		var chapterIds = [];
+		$('#editChapterCtn .chapter_list li').each(function(i){
+			if($(this).find("input[type='checkbox']").is(':checked')){
+			   	var cId = $(this).attr('chapterid');
+				chapterIds.push(cId);
+			}
+		});
+		console.log(chapterIds);
+		if(chapterIds.length == 0){
+			console.log('请勾选章节要提交的章节内容！')
+            $.modal.alertWarning('请勾选需要提交发布的章节');
+			return;   
+		}
+        $.modal.confirm("确认当前课程内容完整并提交审批吗?", function() {
+			$.ajax({
+				dataType: 'json',
+				type: "post",
+				url: apiUrl + `/platform/oralCourse/toApprove`,
+				data: {
+					courseId : currentData.courseId,
+                    chapterIds: chapterIds	//勾选的文章id
+				},
+				async: true,
+				success: function (res) {
+					if(res.code == 0){
+                        treeFn(courseIndex);
+						$.modal.alertSuccess('提交审批成功！！');
+                    }else{
+                        $.modal.alertWarning(res.msg);
+					}
+				}
+			});   
+		})
+	})
+	
+	//审批通过
+	$('#examineBtn').on('click',function(){
+        $.modal.confirm("确认审批通过当前课程吗?", function() {
+			$.ajax({
+				dataType: 'json',
+				type: "post",
+				url: apiUrl + `/platform/oralCourse/approve`,
+				data: {
+					courseId : currentCourseId,
+                    approveStatus: 'ENABLED'
+				},
+				async: true,
+				success: function (res) {
+					if(res.code == 0){
+                        treeFn(courseIndex);
+						$.modal.alertSuccess('审批成功！！');
+                    }else{
+                        $.modal.alertWarning(res.msg);
+					}
+				}
+			});   
+		})
+	
+    })
+	
+	
+//	$('#aaad').on('click',function(){
+//		treeFn(courseIndex);
+//		getChapterFn(currentCourseId);
+//		getContentFn(currentChapterId);
+//	});
+});
+</script>
+
+</body>
+</html>

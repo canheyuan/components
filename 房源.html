@@ -467,8 +467,82 @@
 
 						</div>
 					</div>
+					
+					
+					<div class="tabs-container">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a data-toggle="tab" href="#tab-1" aria-expanded="true"> 0</a>
+							</li>
+							<li class="">
+								<a data-toggle="tab" href="#tab-2" aria-expanded="false">1</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+								<textarea name="shareText" class="form-control layui-textarea valid" rows="6" placeholder="请输入分享文本" id="shareText" aria-invalid="false">我发现了一个非常牛掰又有趣的园区！
+								我发现了一个非常牛掰又有趣的园区！
+								我发现了一个非常牛掰又有趣的园区！
+
+								重要的事情说三遍！
+								快来一起推荐吧～
+								</textarea>
+							</div>
+							<div id="tab-2" class="tab-pane">
+								<textarea name="shareText" class="form-control layui-textarea valid" rows="6" placeholder="请输入分享文本" id="shareText" aria-invalid="false">22我发现了一个非常牛掰又有趣的园区！
+								我发现了一个非常牛掰又有趣的园区！
+								我发现了一个非常牛掰又有趣的园区！
+
+								重要的事情说三遍！
+								快来一起推荐吧～
+								</textarea>
+							</div>
+						</div>
+
+
+					</div>
+					
+					<div class="tjy_list" style="display: none;">
+						<li>
+							<span class="del">删除</span>
+							<span class="edit">修改</span>
+							
+							<p>推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语</p>
+						</li>
+						<li>
+							<span class="del">删除</span>
+							<span class="edit">修改</span>
+							
+							<p>推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语</p>
+						</li>
+						<li>
+							<span class="del">删除</span>
+							<span class="edit">修改</span>
+							
+							<p>推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语</p>
+						</li>
+						<li>
+							<span class="del">删除</span>
+							<span class="edit">修改</span>
+							
+							<p>推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语推荐语</p>
+						</li>
+					</div>
+					
+					<div class="tjy_pop"  style="display: none;">
+						<textarea name="shareText" class="form-control layui-textarea valid" rows="6" placeholder="请输入分享文本" id="shareText" aria-invalid="false">我发现了一个非常牛掰又有趣的园区！
+						我发现了一个非常牛掰又有趣的园区！
+						我发现了一个非常牛掰又有趣的园区！
+
+						重要的事情说三遍！
+						快来一起推荐吧～
+						</textarea>
+						
+					</div>
 
                 </div>
+				
+				
 
             </div>
             
@@ -476,6 +550,15 @@
     </div>
 	<link rel="stylesheet" href="fy.css">
 	
+	<style>
+		.tjy_list{border:1px solid #e5e5e5; padding:10px 20px; background:#fff;}
+		.tjy_list li{height:40px; line-height:40px; border-bottom:1px solid #e5e5e5; list-style: none;}
+		.tjy_list li:last-child{border-bottom:0;}
+		.tjy_list li span{display:inline-block; float:right; margin-left:20px; line-height:40px;}
+		.tjy_list li span.del{color:#f00;}
+		.tjy_list li span.edit{color:deepskyblue;}
+		.tjy_list li p{overflow:hidden; box-sizing:content-box; margin:0; display: block; text-overflow:ellipsis; white-space:nowrap; }
+	</style>
 	
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>

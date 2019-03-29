@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<script src="http://css.gzedu.com/common/js/jquery-1.9.0.min.js" charset="utf-8"></script><!--1.9版本-->
+</head>
+
+<body>
+<style>
+	.btn_list span{display:inline-block; width:100px; height:40px; line-height:40px; background:#337ab7; color:#fff; border-radius:5px; margin-right:15px; margin-bottom:15px; font-size:14px; text-align: center; cursor:pointer; }
+	.btn_list span:active{background:#55a1e2;}
+	
+	.video_left{float:left; width:600px; margin-right:40px;}
+	.video_right{overflow:hidden;}
+	
+</style>
+<div class="secondPage">
+    
+	<div class="ibox" id="">
+		<div class="ibox-title"><h5>video视屏组件</h5></div>
+		<div class="ibox-content clearfix">
+			<div class="video_left">
+				<video id="videoBox" src="http://zt.gdzgjy.com/2017/gushihui/media/yjjx.mp4" style="width:600px!important; height:400px!important;"></video>
+				<div class="btn_list">
+					<span id="v_play" onClick="vPlay()">播放</span>
+					<span id="v_pause" onClick="vPause()">暂停</span>
+					<span id="" onClick="vPlayPause()">播放/暂停</span>
+					<span onClick="vStop()">停止</span>
+					<span onClick="vLoad();">重新加载</span>
+					<br>
+					<span onClick="vSpeed()">加速</span>
+					<span onClick="vUnSpeed()">减速</span>
+					<span onClick="vNormalSpeed()">正常速度</span>
+<!--					<span onClick="canPlayType()">检测是否支持</span>-->
+				</div>
+			</div>
+			<div class="video_right">
+				<table class="table">
+					<tr>
+						<td width="20%">播放速度：</td>
+						<td width="20%" id="tSpeed">1</td>
+						<td width="60%">video.playbackRate</td>
+					</tr>
+					<tr>
+						<td>当前播放时间：</td>
+						<td id="currentTime">0</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>视屏总长度：</td>
+						<td id="timeAll">0</td>
+					</tr>
+					<tr>
+						<td>播放状态：</td>
+						<td id="tStatus">暂停</td>
+					</tr>
+					<tr>
+						<td>播放速度：</td>
+						<td>1</td>
+					</tr>
+				</table>
+			</div>
+			<table class="table">
+				<tr>
+					<td>IOS不自动全屏播放</td>
+					<td> 在video标签上 添加这些属性： muted="true"  x5-video-player-type="h5" playsinline webkit-playsinline="true"</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<script>
+	let videoObj = $('#videoBox').get(0); 
+		
+	//播放
+	function vPlay(){
+		videoObj.play();
+		$('#tStatus').text('播放中');
+	}
+		
+	//播放
+	function vPause(){
+		videoObj.pause();
+		$('#tStatus').text('暂停');
+		
+	}
+		
+	//播放暂停
+	function vPlayPause(){
+		 if(videoObj.paused){ //如果已暂停则播放
+            videoObj.play(); //播放控制
+			$('#tStatus').text('播放中');
+        }else{ // 已播放点击则暂停
+            videoObj.pause(); //暂停控制
+			$('#tStatus').text('暂停');
+        }
+    }
+		
+	//停止
+	function vStop(){
+		videoObj.load();
+		$('#tStatus').text('停止');
+	}
+		
+	//重新加载
+	function vLoad(){
+		videoObj.load();
+		videoObj.play(); //播放控制
+		$('#tStatus').text('播放');
+	}
+		
+	//加速（不能高于16倍）
+	function vSpeed(){
+		var speed = videoObj.playbackRate;
+		if(speed*2<=16){
+		   videoObj.playbackRate = speed*2;
+			$('#tSpeed').text(speed*2);
+		 }
+	}
+	//减速(不能低于0.125倍)
+	function vUnSpeed(){
+		var speed = videoObj.playbackRate;
+		if(speed*0.5>=.125){
+			videoObj.playbackRate = speed*0.5;
+			$('#tSpeed').text(speed*0.5);
+		}
+	}
+	//正常速度
+	function vNormalSpeed(){
+		console.log('正常速度')
+		videoObj.playbackRate = 1;
+		$('#tSpeed').text(1);
+	}
+		
+	//检测浏览器是否支持加载当前的视屏
+	function canPlayType(){
+//		var tiptxt = '检测浏览器是否支持：' + videoObj.canPlayType(type);
+//		console.log(tiptxt);
+//		alert(tiptxt);
+		
+		//	videoObj.canPlayType(type);
+		//	规定要检测的音频/视频类型。
+		//	type的常用值：
+		//	video/ogg
+		//	video/mp4
+		//	video/webm
+		//	audio/mpeg
+		//	audio/ogg
+		//	audio/mp4
+		//	常用值，包括编解码器：
+		//	video/ogg; codecs="theora, vorbis"
+		//	video/mp4; codecs="avc1.4D401E, mp4a.40.2"
+		//	video/webm; codecs="vp8.0, vorbis"
+		//	audio/ogg; codecs="vorbis"
+		//	audio/mp4; codecs="mp4a.40.5"
+		//	注释：如果包含编解码器，则只能返回 "probably"。
+	}
+		
+		
+	//使用事件监听方式捕捉事件
+	videoObj.addEventListener("timeupdate",function(){
+		
+		$('#currentTime').text( videoObj.currentTime.toFixed(2)+'s');
+		$('#timeAll').text(this.duration)
+		
+	},false);
+		
+	//监听事件
+//	eventTester("loadstart");    //客户端开始请求数据
+//	eventTester("progress");    //客户端正在请求数据
+//	eventTester("suspend");    //延迟下载
+//	eventTester("abort");    //客户端主动终止下载（不是因为错误引起），
+//	eventTester("error");    //请求数据时遇到错误
+//	eventTester("stalled");    //网速失速
+//	eventTester("play");    //play()和autoplay开始播放时触发
+//	eventTester("pause");    //pause()触发
+//	eventTester("loadedmetadata");    //成功获取资源长度
+//	eventTester("loadeddata");    //
+//	eventTester("waiting");    //等待数据，并非错误
+//	eventTester("playing");    //开始回放
+//	eventTester("canplay");    //可以播放，但中途可能因为加载而暂停
+//	eventTester("canplaythrough"); //可以播放，歌曲全部加载完毕
+//	eventTester("seeking");    //寻找中
+//	eventTester("seeked");    //寻找完毕
+//	eventTester("timeupdate");    //播放时间改变
+//	eventTester("ended");    //播放结束
+//	eventTester("ratechange");    //播放速率改变
+//	eventTester("durationchange");    //资源长度改变
+//	eventTester("volumechange");    //音量改变  
+		
+		
+	</script>
+	
+    <div class="ibox" style="display:none;">
+        <div class="ibox-title"><h5>H5视频播放器</h5></div>
+        <div class="ibox-content">
+        	<div style="max-width:500px; height:300px;"><video src="http://zt.gdzgjy.com/2017/gushihui/media/yjjx.mp4" controls preload ></video></div>
+        	<pre   class="brush: css;">
+                <video src="http://zt.gdzgjy.com/2017/gushihui/media/yjjx.mp4" controls preload width="400" height="300"></video>
+            </pre>
+            <table class="table"> 
+              <tbody><tr>
+                <th style="width:20%;">属性</th>
+                <th>值</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_autoplay.asp" title="HTML5 <video> autoplay 属性">autoplay</a></td>
+                <td>autoplay</td>
+                <td>如果出现该属性，则视频在就绪后马上播放。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_controls.asp" title="HTML5 <video> controls 属性">controls</a></td>
+                <td>controls</td>
+                <td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_height.asp" title="HTML5 <video> height 属性">height</a></td>
+                <td><i>pixels</i></td>
+                <td>设置视频播放器的高度。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_loop.asp" title="HTML5 <video> loop 属性">loop</a></td>
+                <td>loop</td>
+                <td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_preload.asp" title="HTML5 <video> preload 属性">preload</a></td>
+                <td>preload</td>
+                <td><p>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 "autoplay"，则忽略该属性。</p></td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_src.asp" title="HTML5 <video> src 属性">src</a></td>
+                <td><i>url</i></td>
+                <td>要播放的视频的 URL。</td>
+              </tr>
+              <tr>
+                <td class="html5_new"><a href="/html5/att_video_width.asp" title="HTML5 <video> width 属性">width</a></td>
+                <td><i>pixels</i></td>
+                <td>设置视频播放器的宽度。</td>
+              </tr>
+              <tr>
+                <td colspan="3">
+					<pre class="brush: css;">
+					eventTester("loadstart");    //客户端开始请求数据
+					eventTester("progress");    //客户端正在请求数据
+					eventTester("suspend");    //延迟下载
+					eventTester("abort");    //客户端主动终止下载（不是因为错误引起），
+					eventTester("error");    //请求数据时遇到错误
+					eventTester("stalled");    //网速失速
+					eventTester("play");    //play()和autoplay开始播放时触发
+					eventTester("pause");    //pause()触发
+					eventTester("loadedmetadata");    //成功获取资源长度
+					eventTester("loadeddata");    //
+					eventTester("waiting");    //等待数据，并非错误
+					eventTester("playing");    //开始回放
+					eventTester("canplay");    //可以播放，但中途可能因为加载而暂停
+					eventTester("canplaythrough"); //可以播放，歌曲全部加载完毕
+					eventTester("seeking");    //寻找中
+					eventTester("seeked");    //寻找完毕
+					eventTester("timeupdate");    //播放时间改变
+					eventTester("ended");    //播放结束
+					eventTester("ratechange");    //播放速率改变
+					eventTester("durationchange");    //资源长度改变
+					eventTester("volumechange");    //音量改变  
+					</pre>
+				</td>
+              </tr>
+            </tbody></table>
+        </div>
+    </div>
+	
+	
+    
+</div>
+</body>
+<link rel="stylesheet" href="js/shCoreRDark.css" /><!--代码美化插件-->
+<script src="js/shCore_all.js"></script><!--代码美化插件-->
+</html>
